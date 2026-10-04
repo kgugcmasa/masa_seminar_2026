@@ -551,6 +551,120 @@ footer p{margin-top:16px}
 .nb-foot{padding:0 34px 30px}
 .nb-foot .btn{font-size:14px;padding:12px 26px}
 @media(max-width:520px){.nb-head{padding:24px 20px 16px}.nb-body{padding:20px 20px 26px;font-size:14.5px}.nb-foot{padding:0 20px 24px}}
+
+/* ---------- クイズ＄マサオネア ---------- */
+.mo-btn{margin-top:12px;width:100%;display:flex;align-items:center;gap:16px;text-align:left;border:1px solid rgba(255,196,84,.45);border-radius:16px;background:linear-gradient(120deg,rgba(90,70,160,.30),rgba(255,180,84,.10));cursor:pointer;padding:16px 20px;color:#EAEFF7;font:inherit;transition:border-color .3s,transform .3s,box-shadow .3s}
+.mo-btn:hover{border-color:#FFC454;transform:translateY(-2px);box-shadow:0 12px 34px rgba(160,120,255,.25)}
+.mo-ico{flex-shrink:0;width:30px;height:30px;border-radius:50%;background:linear-gradient(140deg,#FFE9A8,#FFB454 55%,#E8913A);color:#2A1A05;display:grid;place-items:center;font-family:var(--lat);font-weight:700;font-size:17px;box-shadow:0 0 14px rgba(255,196,84,.5)}
+.mo-lab{display:block;font-family:var(--lat);font-size:9.5px;font-weight:700;letter-spacing:.24em;color:#FFC454}
+.mo-arrow{flex-shrink:0;font-size:12px;color:#FFC454;transition:transform .3s}
+.mo-btn:hover .mo-arrow{transform:translateX(4px)}
+
+.mo-overlay{position:fixed;inset:0;z-index:230;background:radial-gradient(ellipse at 50% 0%,rgba(74,54,130,.55),rgba(5,7,14,.94) 60%),rgba(5,7,14,.95);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);opacity:0;pointer-events:none;transition:opacity .45s ease;display:grid;place-items:center;padding:20px}
+.mo-overlay.show{opacity:1;pointer-events:auto}
+.mo-overlay:not(.show),.mo-overlay:not(.show) *{pointer-events:none!important}
+.mo-modal{position:relative;width:min(680px,100%);max-height:92vh;display:flex;flex-direction:column;transform:translateY(24px) scale(.97);transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.mo-overlay.show .mo-modal{transform:none}
+.mo-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}
+.mo-logo{font-family:var(--mincho);font-weight:800;font-size:clamp(17px,2.8vw,22px);letter-spacing:.06em;color:#fff;text-shadow:0 0 22px rgba(255,196,84,.55)}
+.mo-logo b{background:linear-gradient(140deg,#FFE9A8,#FFB454);-webkit-background-clip:text;background-clip:text;color:transparent}
+.mo-tools{display:flex;gap:8px}
+.mo-ctl{width:36px;height:36px;border:1px solid rgba(255,255,255,.2);border-radius:50%;background:rgba(10,14,24,.7);color:#EAEFF7;cursor:pointer;display:grid;place-items:center;font-size:15px;transition:border-color .2s,color .2s,transform .2s}
+.mo-ctl:hover{border-color:#FFC454;color:#FFC454}
+.mo-ctl.x:hover{transform:rotate(90deg)}
+.mo-ctl svg{width:16px;height:16px}
+.mo-ctl.off{opacity:.45}
+
+/* ステージ（問題パネル） */
+.mo-stage{background:linear-gradient(170deg,rgba(28,24,56,.95),rgba(10,12,24,.98));border:1px solid rgba(255,196,84,.28);border-radius:24px;box-shadow:0 30px 90px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.06);overflow:hidden;display:flex;flex-direction:column;min-height:0}
+.mo-bar{display:flex;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid rgba(255,255,255,.08);background:rgba(0,0,0,.25);flex-shrink:0}
+.mo-step{font-family:var(--lat);font-weight:700;font-size:12px;letter-spacing:.1em;color:#FFC454;white-space:nowrap}
+.mo-rank{font-size:12px;color:#C4CDDD;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mo-dots{margin-left:auto;display:flex;gap:4px}
+.mo-dots i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.18)}
+.mo-dots i.ok{background:linear-gradient(140deg,#FFE9A8,#FFB454)}
+.mo-dots i.now{background:#fff;box-shadow:0 0 8px #FFC454}
+
+.mo-body{padding:24px 24px 26px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(255,196,84,.4) transparent}
+.mo-body::-webkit-scrollbar{width:6px}
+.mo-body::-webkit-scrollbar-thumb{background:rgba(255,196,84,.4);border-radius:6px}
+.mo-q{font-family:var(--mincho);font-weight:700;font-size:clamp(17px,2.5vw,21px);line-height:1.75;color:#fff;text-align:center;min-height:62px;display:grid;place-items:center;padding:6px 4px 18px}
+
+/* 選択肢（斜めカット・クイズショー風） */
+.mo-opts{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.mo-opt{position:relative;display:flex;align-items:center;gap:11px;text-align:left;font:inherit;font-size:14.5px;font-weight:600;line-height:1.5;color:#EAEFF7;background:linear-gradient(100deg,rgba(18,22,44,.95),rgba(30,34,66,.95));border:1px solid rgba(255,255,255,.16);border-radius:10px;padding:14px 16px;cursor:pointer;transition:border-color .2s,background .2s,transform .15s,box-shadow .2s;clip-path:polygon(14px 0,100% 0,calc(100% - 14px) 100%,0 100%)}
+.mo-opt:hover:not(:disabled){border-color:#FFC454;background:linear-gradient(100deg,rgba(60,48,20,.9),rgba(90,70,30,.9));transform:translateY(-1px)}
+.mo-opt:disabled{cursor:default}
+.mo-opt .ab{flex-shrink:0;width:24px;font-family:var(--lat);font-weight:700;font-size:15px;color:#FFC454}
+.mo-opt.gone{opacity:.14;pointer-events:none}
+.mo-opt.sel{border-color:#FFC454;background:linear-gradient(100deg,rgba(120,92,24,.95),rgba(160,120,32,.95));animation:moBlink .5s steps(2,start) infinite}
+@keyframes moBlink{0%,100%{box-shadow:0 0 0 rgba(255,196,84,0)}50%{box-shadow:0 0 26px rgba(255,196,84,.8)}}
+.mo-opt.right{border-color:#53E08B!important;background:linear-gradient(100deg,rgba(22,86,52,.95),rgba(34,130,78,.95))!important;animation:none;box-shadow:0 0 28px rgba(83,224,139,.55)}
+.mo-opt.wrong{border-color:#FF6B5E!important;background:linear-gradient(100deg,rgba(96,28,24,.95),rgba(140,44,38,.95))!important;animation:none}
+@media (prefers-reduced-motion:reduce){.mo-opt.sel{animation:none}}
+@media(max-width:600px){.mo-opts{grid-template-columns:1fr}.mo-opt{clip-path:none;border-radius:12px}}
+
+/* ファイナルアンサー確認 */
+.mo-confirm{margin-top:16px;display:none;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;text-align:center}
+.mo-confirm.show{display:flex}
+.mo-confirm .ask{width:100%;font-family:var(--mincho);font-weight:700;font-size:16px;color:#FFC454;letter-spacing:.06em}
+.mo-yes,.mo-no{font:inherit;font-weight:700;font-size:14.5px;padding:12px 26px;border-radius:999px;cursor:pointer;border:none;transition:transform .2s,box-shadow .2s}
+.mo-yes{background:linear-gradient(140deg,#FFE9A8,#FFB454 60%,#E8913A);color:#2A1A05;box-shadow:0 8px 24px rgba(255,180,84,.4)}
+.mo-yes:hover{transform:translateY(-2px)}
+.mo-no{background:transparent;border:1.5px solid rgba(255,255,255,.28);color:#EAEFF7}
+.mo-no:hover{border-color:#FFC454;color:#FFC454}
+
+/* ライフライン */
+.mo-life{display:flex;gap:10px;justify-content:center;padding:0 24px 20px;flex-wrap:wrap}
+.mo-l{position:relative;font:inherit;font-weight:700;font-size:12.5px;letter-spacing:.04em;padding:10px 16px;border-radius:999px;border:1.5px solid rgba(255,196,84,.45);background:rgba(10,14,24,.6);color:#FFD98A;cursor:pointer;transition:border-color .2s,background .2s,transform .2s}
+.mo-l:hover:not(:disabled){background:rgba(255,196,84,.14);transform:translateY(-2px)}
+.mo-l:disabled{opacity:.3;cursor:default;text-decoration:line-through}
+
+/* 解説・ヘルプ結果 */
+.mo-exp{margin-top:18px;display:none;border-radius:14px;padding:16px 18px;font-size:14px;line-height:1.9;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:#D6DEEC}
+.mo-exp.show{display:block;animation:moUp .45s both}
+.mo-exp .h{font-weight:700;font-size:13px;letter-spacing:.08em;margin-bottom:6px}
+.mo-exp.ok .h{color:#53E08B}
+.mo-exp.ng .h{color:#FF8A7E}
+@keyframes moUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.mo-help{margin-top:16px;display:none;border-radius:14px;padding:16px 18px;border:1px solid rgba(127,209,255,.3);background:rgba(127,209,255,.08);color:#DCE8F6;font-size:13.5px;line-height:1.85}
+.mo-help.show{display:block;animation:moUp .4s both}
+.mo-help .h{font-family:var(--lat);font-size:10px;font-weight:700;letter-spacing:.22em;color:#7FD1FF;margin-bottom:8px}
+.mo-aud{display:grid;gap:7px;margin-top:4px}
+.mo-aud .row{display:flex;align-items:center;gap:10px;font-size:12.5px}
+.mo-aud .k{width:18px;font-family:var(--lat);font-weight:700;color:#7FD1FF}
+.mo-aud .track{flex:1;height:10px;border-radius:6px;background:rgba(255,255,255,.1);overflow:hidden}
+.mo-aud .fill{height:100%;border-radius:6px;background:linear-gradient(90deg,#7FD1FF,#6C8CFF);width:0;transition:width .9s cubic-bezier(.2,.8,.2,1)}
+.mo-aud .p{width:40px;text-align:right;font-family:var(--lat);font-weight:700;color:#EAEFF7}
+
+.mo-next{margin-top:18px;text-align:center;display:none}
+.mo-next.show{display:block}
+.mo-nx{font:inherit;font-weight:700;font-size:14.5px;padding:13px 32px;border-radius:999px;border:none;cursor:pointer;background:linear-gradient(140deg,#FFE9A8,#FFB454 60%,#E8913A);color:#2A1A05;box-shadow:0 8px 24px rgba(255,180,84,.4);transition:transform .2s}
+.mo-nx:hover{transform:translateY(-2px)}
+
+/* スタート画面・結果画面 */
+.mo-intro,.mo-result{padding:34px 28px 32px;text-align:center;display:none}
+.mo-intro.show,.mo-result.show{display:block}
+.mo-intro h3{font-family:var(--mincho);font-weight:800;font-size:clamp(22px,4vw,30px);color:#fff;letter-spacing:.04em;margin-bottom:12px}
+.mo-intro p{font-size:14px;color:#C4CDDD;line-height:1.95;max-width:430px;margin:0 auto}
+.mo-rules{margin:20px auto 24px;max-width:420px;text-align:left;display:grid;gap:8px}
+.mo-rules li{list-style:none;font-size:13.5px;color:#D6DEEC;padding-left:22px;position:relative;line-height:1.8}
+.mo-rules li::before{content:"$";position:absolute;left:0;top:0;font-family:var(--lat);font-weight:700;color:#FFC454}
+.mo-go{font:inherit;font-weight:700;font-size:16px;padding:16px 42px;border-radius:999px;border:none;cursor:pointer;background:linear-gradient(140deg,#FFE9A8,#FFB454 60%,#E8913A);color:#2A1A05;box-shadow:0 10px 32px rgba(255,180,84,.45);transition:transform .25s,box-shadow .25s}
+.mo-go:hover{transform:translateY(-3px);box-shadow:0 16px 42px rgba(255,180,84,.6)}
+.mo-score{font-family:var(--lat);font-weight:700;font-size:62px;line-height:1;background:linear-gradient(140deg,#FFE9A8,#FFB454 55%,#FF8A5C);-webkit-background-clip:text;background-clip:text;color:transparent}
+.mo-score small{font-size:24px;color:#8B96AC;-webkit-text-fill-color:#8B96AC}
+.mo-rankname{font-family:var(--mincho);font-weight:800;font-size:clamp(20px,3.4vw,27px);color:#fff;margin-top:14px;letter-spacing:.04em}
+.mo-cmt{margin-top:14px;font-size:15px;color:#D6DEEC;line-height:1.95;max-width:450px;margin-left:auto;margin-right:auto}
+.mo-cmt em{font-style:normal;font-weight:700;background:linear-gradient(140deg,#FFE9A8,#FFB454);-webkit-background-clip:text;background-clip:text;color:transparent}
+.mo-shot{margin-top:18px;font-size:12.5px;color:var(--tx-muted);line-height:1.8}
+.mo-rbtns{margin-top:26px;display:flex;gap:11px;justify-content:center;flex-wrap:wrap}
+.mo-rb{font:inherit;font-weight:700;font-size:14.5px;padding:13px 26px;border-radius:999px;cursor:pointer;border:none;transition:transform .2s}
+.mo-rb.g{background:linear-gradient(140deg,#FFE9A8,#FFB454 60%,#E8913A);color:#2A1A05;box-shadow:0 8px 24px rgba(255,180,84,.4)}
+.mo-rb.o{background:transparent;border:1.5px solid rgba(255,255,255,.28);color:#EAEFF7}
+.mo-rb.o:hover{border-color:#FFC454;color:#FFC454}
+.mo-rb:hover{transform:translateY(-2px)}
+@media(max-width:520px){.mo-body{padding:18px 16px 20px}.mo-life{padding:0 16px 16px;gap:7px}.mo-l{font-size:11.5px;padding:9px 12px}.mo-intro,.mo-result{padding:26px 18px 26px}.mo-score{font-size:50px}}
 </style>
 </head>
 <body>
@@ -739,6 +853,14 @@ footer p{margin-top:16px}
           </span>
           <span class="vb-arrow" aria-hidden="true">▶</span>
         </button>
+        <button class="mo-btn" id="moStart">
+          <span class="mo-ico" aria-hidden="true">$</span>
+          <span class="vb-txt">
+            <span class="mo-lab">QUIZ $ MASAONAIRE</span>
+            <span class="vb-ttl">クイズ＄マサオネア ー 深田先生と深田ゼミについて知ろう！</span>
+          </span>
+          <span class="mo-arrow" aria-hidden="true">▶</span>
+        </button>
       </div>
     </div>
   </div>
@@ -759,7 +881,7 @@ footer p{margin-top:16px}
       <div class="year reveal">
         <span class="year-badge">３回生</span><span class="year-sub">3RD YEAR</span>
         <div class="tl">
-          <div class="tl-row"><b>2月</b><span>留学前に自己紹介</span></div>
+          <div class="tl-row"><b>3月</b><span>留学前に自己紹介</span></div>
           <div class="tl-row"><b>9月</b><span>留学報告／顔合わせ・４回生卒プ報告・面談</span></div>
           <div class="tl-row"><b>10月</b><span>レジュメ発表①、面談</span></div>
           <div class="tl-row"><b>11月</b><span>レジュメ発表②</span></div>
@@ -1075,7 +1197,7 @@ footer p{margin-top:16px}
       </div>
       <div class="faq-item">
         <button type="button" class="faq-q"><span class="qi">Q</span><span>先輩方ってどんなところに就職していますか？</span><span class="arw">▼</span></button>
-        <div class="faq-a"><div class="faq-a-in">さまざまな業種に就職しています。今までで言えば、<strong>ホテル、旅行会社、航空会社、アパレル、ウェディング、住宅、中学校教員、スポーツインストラクター</strong>等です。</div></div>
+        <div class="faq-a"><div class="faq-a-in">さまざまな業種に就職しています。今までで言えば、<strong>ホテル、旅行会社、航空会社、アパレル、住宅、スポーツインストラクター</strong>等です。</div></div>
       </div>
       <div class="faq-item">
         <button type="button" class="faq-q"><span class="qi">Q</span><span>どんな学外イベントをしていますか？</span><span class="arw">▼</span></button>
@@ -1122,6 +1244,73 @@ footer p{margin-top:16px}
     </div>
     <div class="nb-body" id="nbText"></div>
     <div class="nb-foot"><button type="button" class="btn btn-ghost" id="nbCloseBtn">閉じる</button></div>
+  </div>
+</div>
+
+<!-- MASAONAIRE MODAL -->
+<div class="mo-overlay" id="moOverlay" role="dialog" aria-modal="true" aria-labelledby="moLogo">
+  <div class="mo-modal">
+    <div class="mo-top">
+      <div class="mo-logo" id="moLogo">クイズ<b>＄</b>マサオネア</div>
+      <div class="mo-tools">
+        <button class="mo-ctl" id="moMusic" aria-label="音楽 ON / OFF" title="音楽 ON / OFF">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+        </button>
+        <button class="mo-ctl x" id="moClose" aria-label="閉じる">✕</button>
+      </div>
+    </div>
+
+    <div class="mo-stage">
+      <!-- スタート画面 -->
+      <div class="mo-intro show" id="moIntro">
+        <h3>深田先生と深田ゼミについて知ろう！</h3>
+        <p>全10問。だんだん難しくなります。<br>困ったときは3つのヘルプが1回ずつ使えます。</p>
+        <ul class="mo-rules">
+          <li><b>50:50</b>　不正解の選択肢を2つ消します</li>
+          <li><b>テレフォン</b>　詳しい知人に電話して意見を聞きます</li>
+          <li><b>オーディエンス</b>　会場のみんなに聞いてみます</li>
+        </ul>
+        <button class="mo-go" id="moGo">チャレンジする</button>
+      </div>
+
+      <!-- 出題画面 -->
+      <div id="moPlay" style="display:none">
+        <div class="mo-bar">
+          <span class="mo-step" id="moStep">Q1 / 10</span>
+          <span class="mo-rank" id="moRank">見学にきた人</span>
+          <span class="mo-dots" id="moDots"></span>
+        </div>
+        <div class="mo-body">
+          <p class="mo-q" id="moQ"></p>
+          <div class="mo-opts" id="moOpts"></div>
+          <div class="mo-confirm" id="moConfirm">
+            <span class="ask">ファイナルアンサー？</span>
+            <button class="mo-yes" id="moYes">ファイナルアンサー！</button>
+            <button class="mo-no" id="moNo">選び直す</button>
+          </div>
+          <div class="mo-help" id="moHelp"></div>
+          <div class="mo-exp" id="moExp"></div>
+          <div class="mo-next" id="moNext"><button class="mo-nx" id="moNx">次の問題へ</button></div>
+        </div>
+        <div class="mo-life" id="moLife">
+          <button class="mo-l" id="moL1">50:50</button>
+          <button class="mo-l" id="moL2">テレフォン</button>
+          <button class="mo-l" id="moL3">オーディエンス</button>
+        </div>
+      </div>
+
+      <!-- 結果画面 -->
+      <div class="mo-result" id="moResult">
+        <div class="mo-score"><span id="moNum">0</span><small> / 10</small></div>
+        <div class="mo-rankname" id="moRankName"></div>
+        <p class="mo-cmt" id="moCmt"></p>
+        <p class="mo-shot" id="moShot"></p>
+        <div class="mo-rbtns">
+          <button class="mo-rb g" id="moAgain">もう一度チャレンジ</button>
+          <button class="mo-rb o" id="moDone">閉じる</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1732,17 +1921,18 @@ safe('visits',function(){
 //  お知らせ掲示板設定
 //  ★ GAS（お知らせ用）のウェブアプリURLをここに貼ってください
 // ============================================================
-var NOTICE_URL = "https://script.google.com/macros/s/AKfycbxD3zjGsVdqb8aRwabyv98RBp0gSPjDEPy7j4rRi4eMsC10fRr6z9ei_N15jPfYnw49XA/exec";   // 例: "https://script.google.com/macros/s/xxxxx/exec"
+var NOTICE_URL = "https://script.google.com/macros/s/AKfycbwPdeLpyX8xOdLwqUHaOgXJQIhqkfnLu8KpEmV0Jm02mO6dGWPupgUaP3mBMUE_6f7FlA/exec";   // 例: "https://script.google.com/macros/s/xxxxx/exec"
 
 safe('notice',function(){
   var listEl=$('nbList'), ov=$('nbOverlay');
   if(!listEl||!ov)return;
 
-  // GAS未設定・通信失敗時に表示する既定のお知らせ
+  // GAS未設定・通信失敗時に表示する内容
+  // ※ 誤った日付が出ないよう、ここでは日付を入れていません（日付はGASから取得します）
   var FALLBACK=[
-    {date:'2026-09-18', title:'深田ゼミ 説明会・研究室訪問を受付中です',
+    {date:'', dateText:'', title:'深田ゼミ 説明会・研究室訪問を受付中です',
      body:'深田ゼミでは、随時 研究室訪問を受け付けています。\n\n場所：D441（D棟4階）\n時間の目安：月・火・水の昼休み\n\nアポイントを取っていただいた方が確実です。メールまたは下部の質問フォームからご連絡ください。\n質問だけでも大歓迎です。お気軽にお越しください！'},
-    {date:'2026-09-01', title:'エントリーシートの受付を開始しました',
+    {date:'', dateText:'', title:'エントリーシートの受付を開始しました',
      body:'深田ゼミのエントリーシート受付を開始しました。\n\nページ下部の「エントリーシートを記入する」ボタン、またはナビゲーションの「エントリー」からご記入ください。\n\n面談を実施しますので、記入後は研究室までお越しください。皆さんの熱意をお待ちしています！'}
   ];
 
@@ -1840,12 +2030,19 @@ safe('notice',function(){
     }
     return out;
   }
-  function fail(){ render(FALLBACK); }
+  function fail(reason){
+    if(!NOTICE_URL){
+      console.warn('[お知らせ掲示板] NOTICE_URL が未設定です。GASのURLを var NOTICE_URL = "..." に貼り付けてください。');
+    }else{
+      console.warn('[お知らせ掲示板] GASから取得できませんでした（'+(reason||'通信エラー')+'）。URL・デプロイ設定（アクセスできるユーザー＝全員）をご確認ください。');
+    }
+    render(FALLBACK);
+  }
 
-  if(!NOTICE_URL){ fail(); return; }
+  if(!NOTICE_URL){ fail('URL未設定'); return; }
   var url=NOTICE_URL+(NOTICE_URL.indexOf('?')<0?'?':'&')+'t='+Date.now();
   var done=false;
-  var timer=setTimeout(function(){ if(!done){ done=true; fail(); } },6000);
+  var timer=setTimeout(function(){ if(!done){ done=true; fail('タイムアウト'); } },6000);
   function ok(text){
     if(done)return; done=true; clearTimeout(timer);
     try{
@@ -1865,6 +2062,317 @@ safe('notice',function(){
       x.send();
     }catch(e){ fail(); }
   }
+});
+
+// ============================================================
+//  クイズ＄マサオネア（QUIZ $ MASAONAIRE）
+//  ※ 既存機能には一切手を加えず、独立して動作します
+// ============================================================
+safe('masaonaire',function(){
+  var ov=$('moOverlay'); if(!ov)return;
+
+  var BANK=[{"lv": 1, "q": "深田先生の一番好きな食べ物は次のうちどれでしょう？", "o": ["カレー", "ハンバーグ", "焼肉", "ラーメン"], "a": 2, "e": "みんなで食べる焼肉が大好きです！"}, {"lv": 1, "q": "深田先生は、どこに留学したでしょうか？", "o": ["イギリス", "ニュージーランド", "アメリカ", "オーストラリア"], "a": 2, "e": "大学卒業後、アメリカ・カリフォルニア州の大学に2年間、留学をしていました。"}, {"lv": 1, "q": "深田先生の趣味のひとつであるウィンタースポーツは何でしょう？", "o": ["スキー", "スノーボード", "アイススケート", "カーリング"], "a": 1, "e": "北志賀へのスキーツアーなども楽しむアクティブな一面があります。"}, {"lv": 1, "q": "深田ゼミのサイト冒頭「学びを楽しむ力が、あなたの〇〇になる」。〇〇に入る言葉は？", "o": ["武器", "財産", "自信", "未来"], "a": 0, "e": "いかに学びを楽しめるかは、将来 社会に出た時に大きな武器になります！"}, {"lv": 1, "q": "深田ゼミの卒業論文指導のスタイルを表す言葉として適切なものは？", "o": ["自由で放任", "厳しくスパルタ", "本気で丁寧", "短期集中"], "a": 2, "e": "卒論指導がゼミの中心。私もゼミ生も本気です！そして丁寧な指導を心がけています。"}, {"lv": 1, "q": "深田ゼミでは、何について「自分で決める」ことを大切にしているでしょう？", "o": ["研究テーマ", "合宿の行き先", "発表のスケジュール", "成績評価の基準"], "a": 0, "e": "研究テーマを決める過程も大切にしています。"}, {"lv": 1, "q": "ギャラリーの写真で、ゼミ生が体育館で実施しているのは何の大会でしょう？", "o": ["バスケットボール大会", "ドッジボール大会", "バレーボール大会", "フットサル大会"], "a": 1, "e": "第2体育館を借りて、みんなでドッジボール大会を実施しました。楽しかった！"}, {"lv": 1, "q": "ギャラリーに掲載されている、笑顔の「卒業旅行」の行き先はどこでしょう？", "o": ["ハワイ", "セブ島", "バリ島", "プーケット"], "a": 2, "e": "みんなで常夏のバリ島へ。観光、食事、夜中にみんなでプールと最高に楽しかったです！"}, {"lv": 1, "q": "ギャラリーに掲載されている、春に行われる親睦イベントは何でしょう？", "o": ["お花見", "ボウリング大会", "BBQ大会", "ハイキング"], "a": 2, "e": "ポーアイや海岸、BBQ会場などでバーベキューを楽しみます！深田得意の「焼きそば」も振る舞います！"}, {"lv": 1, "q": "２年間の流れの最後に「〇〇の数だけ、あなたは強くなる。」。〇〇に入る言葉は？", "o": ["フィードバック", "プレゼンテーション", "アウトプット", "コミュニケーション"], "a": 2, "e": "インプットも大事ですが、たくさんアウトプットすればそれだけ反応も得ます。成長してください。"}, {"lv": 1, "q": "深田先生がこれまで英語を教えてきた対象年齢として正しいものは？", "o": ["中学生〜大学生", "小学生〜高校生", "0歳児〜大学生", "大学生・社会人のみ"], "a": 2, "e": "児童英会話から受験英語、高校教諭、そして大学まで、あらゆる世代に教えるプロフェッショナルです。"}, {"lv": 1, "q": "深田ゼミで、先生が「これだけは絶対に許さない！」とよく言っているルールは？", "o": ["発表の準備を前日に始めること", "他人の意見を頭ごなしに否定すること", "無断遅刻と欠席", "飲み会で先生より先に帰ること"], "a": 2, "e": "ゼミはチームワークの場。無断遅刻・欠席は厳禁です！"}, {"lv": 2, "q": "深田先生の「ふかだ」という名字。よく間違えられて訂正する羽目になる漢字は？", "o": ["吹田", "福田", "冨加田", "深多"], "a": 1, "e": "「福田ではありません、深田です！」と念押しすることもしばしば。"}, {"lv": 2, "q": "お酒を飲まない時、深田先生がよく飲んでいるお気に入りのドリンクは？", "o": ["エナジードリンク", "緑茶", "ブラックコーヒー", "スムージー"], "a": 1, "e": "コーヒーが飲めません。緑茶や紅茶系の飲み物をよく楽しんでいます。"}, {"lv": 2, "q": "ジャズを聴きながら飲むのが好きな、深田先生のお酒は？", "o": ["日本酒", "ウイスキー", "ワイン", "クラフトビール"], "a": 1, "e": "ジャズとウイスキーの組み合わせをこよなく愛しています。"}, {"lv": 2, "q": "深田研究室で、ゼミ生向けに開催されることのある食事・カフェイベントの通称は？", "o": ["深田ダイニング", "MASA Cafe", "グローバル食堂", "FUKADAバル"], "a": 1, "e": "研究室メシを振る舞ったり、MASA Cafeを開催したりと、学生との交流を大切にしています。"}, {"lv": 2, "q": "深田先生が休日に最もよくしているリフレッシュ方法は？", "o": ["ジムに行ってワークアウト", "スパイスから本格的なカレーを作る", "ロードバイクで20km走り込む", "ひたすらサウナで整う"], "a": 0, "e": "クロストレーナーなどで汗を流した後、お風呂やサウナに行くのが定番のリフレッシュです！"}, {"lv": 2, "q": "深田先生は、通勤に往復何時間かかっているでしょうか？", "o": ["30分", "1時間", "2時間", "4時間"], "a": 3, "e": "住まいは奈良県の古都です。片道2時間、往復4時間かかります！"}, {"lv": 2, "q": "ギャラリーの写真で、「充実した1年」の願いをのせて天燈を上げた場所は？", "o": ["台湾・十分", "タイ・チェンマイ", "韓国・ソウル", "ベトナム・ホイアン"], "a": 0, "e": "台湾では食事や観光、そして毎晩ナイトマーケットで屋台料理を楽しみました。また行きたい！！"}, {"lv": 2, "q": "深田先生が派遣講師を務めている団体はどれでしょう？", "o": ["日本英語検定協会", "TOEIC運営委員会", "日本ユネスコ協会", "青年海外協力隊"], "a": 0, "e": "長年、日本英語検定協会（英検）の派遣講師として、学校や教育委員会で講演をしています。"}, {"lv": 2, "q": "先輩の研究テーマの一例。「USJの何が与える影響」について調べたでしょう？", "o": ["キャラクター", "アトラクション", "ホスピタリティ", "非日常性"], "a": 3, "e": "USJが子どもの頃から大好き！それを研究にしたいとのことで、このテーマが決まりました。"}, {"lv": 2, "q": "先輩の研究テーマの一例。「いつ効果的なヨガの方法」について調べたでしょう？", "o": ["就寝前", "留学中", "授業の合間", "テスト前"], "a": 1, "e": "執筆した本人が悩んだ体の不調を整えるために提案したものです！"}, {"lv": 2, "q": "先輩の研究テーマの一例。神戸の魅力をSNSで発信する際、誰に向けて開設・運用した？", "o": ["修学旅行生", "地元住民", "インバウンド", "留学生"], "a": 2, "e": "神戸の魅力を世界の人に届けたいとの思いで開設したインスタグラム。穴場だらけです！"}, {"lv": 2, "q": "深田ゼミの授業デザインにおいて、先生が「使っていない」ツールはどれでしょう？", "o": ["Padlet", "Kahoot!", "Canva", "原稿用紙と黒板だけの授業"], "a": 3, "e": "MoodleやAIツールも含め、最新のデジタルツール（ICT）をフル活用した授業を展開しています。"}, {"lv": 3, "q": "深田先生が現在の研究テーマ（英語教育学）に興味を持った「きっかけ」は？", "o": ["学生時代に図書館で見つけた一冊の本に衝撃を受けた", "恩師に「君は向いている」と言われた", "留学先で経験したカルチャーショック", "別の研究から偶然たどり着いた"], "a": 0, "e": "図書館での運命的な出会いが、今の研究につながっています。"}, {"lv": 3, "q": "議論が白熱した時、深田先生がよく口にする「お決まりのセリフ」は？", "o": ["それ、面白い視点だけどエビデンスある？", "一旦、ゼロベースで考えてみようか", "で、落としどころは？", "結論から言うと、それは『愛』だよ"], "a": 2, "e": "白熱した議論をどうまとめるか。常に建設的な「落としどころ」を求めています。"}, {"lv": 3, "q": "2025年8月に実施された深田ゼミの夏合宿（キャンプ）の行き先は？", "o": ["琵琶湖（滋賀）", "淡路島（ウェルネスパーク五色）", "軽井沢（長野）", "六甲山（兵庫）"], "a": 1, "e": "ゼミ生やOBOGも交えて、ウェルネスパーク五色で合宿を行いました。"}, {"lv": 3, "q": "2026年8月に実施されたゼミのキャンプ旅行の行き先は？", "o": ["京都（天橋立・伊根）", "和歌山（白浜）", "三重（伊勢志摩）", "広島（宮島）"], "a": 0, "e": "天橋立や伊根の舟屋などで有名なエリアでキャンプを行いました。"}, {"lv": 3, "q": "深田先生がキャンパス環境をより良くするために、撤去を強く望んでいるものは？", "o": ["古くなったベンチ", "D号館近くの屋外喫煙所", "使われていない駐輪場", "学生食堂の券売機"], "a": 1, "e": "ノンスモーキングなキャンパス環境を推奨しています。"}, {"lv": 3, "q": "深田先生が国内出張や旅行の際、よく愛用している定番のビジネスホテルは？", "o": ["アパホテル", "ルートイン", "スーパーホテル", "特に決まっていない"], "a": 3, "e": "出張などで国内の移動が多いので、特に決まっていません。"}, {"lv": 3, "q": "3回生のスケジュールで、2月（留学前）に行うことは何でしょう？", "o": ["留学報告", "歓迎会", "テーマ決定", "質問紙作成"], "a": 1, "e": "留学前の2月に自己紹介を兼ねて歓迎会を実施。GC学部のゼミ内では最速の歓迎会実施です！"}, {"lv": 3, "q": "3回生のスケジュールで、9月に4回生との顔合わせと合わせて行うことは？", "o": ["留学報告", "レジュメ発表", "調査開始", "自己紹介"], "a": 0, "e": "3回生の留学帰国直後となりますので、留学報告を実施します！"}, {"lv": 3, "q": "3回生の12月のスケジュールとして、レジュメ発表③と併せて行うことは？", "o": ["最終稿提出", "留学報告", "質問紙作成", "テーマ決定"], "a": 2, "e": "質問紙を作成し、実施します。質問紙作成は、他のゼミ生からもたくさんの意見を聞きます。"}, {"lv": 3, "q": "4回生のスケジュールで、11月末に行うことは何でしょう？", "o": ["卒論・卒プ発表", "第１稿提出", "大学事務局に提出", "フィールド調査"], "a": 1, "e": "11月末に卒論・卒業プロジェクトの初稿を提出します。"}, {"lv": 3, "q": "4回生の最後のスケジュールとして、1月に行うことは何でしょう？", "o": ["第１稿提出", "最終テーマ報告", "卒論・卒プ発表", "事務局へ提出"], "a": 3, "e": "年内には完成、年明けに大学に提出するスケジュールで毎年実施しています。"}];
+
+  // 10問の「ランク」（進むほど難しくなる）
+  var RANKS=['見学にきた人','ゼミ説明会 参加者','エントリー受付済み','面談ウェイティング','深田ゼミ 仮配属',
+             '深田ゼミ 正式配属','3回生 エース','4回生 卒論生','深田ゼミ OBOG','深田ゼミ 名誉教授'];
+
+  var ABC=['A','B','C','D'];
+  var qs=[], idx=0, score=0, sel=-1, locked=false, used={l1:false,l2:false,l3:false}, gone=[];
+
+  // ---------- 効果音（オリジナル・Web Audio）----------
+  var MA=(function(){
+    var ctx=null,bed=null,on=true;
+    function ensure(){ try{ if(!ctx) ctx=new (window.AudioContext||window.webkitAudioContext)(); }catch(e){ ctx=null; } return ctx; }
+    function resume(){ if(ctx&&ctx.state==='suspended'){ try{ctx.resume();}catch(e){} } }
+    function tone(f,t,dur,vol,type){
+      if(!ctx)return;
+      var o=ctx.createOscillator(),g=ctx.createGain();
+      o.type=type||'triangle'; o.frequency.setValueAtTime(f,t);
+      o.connect(g); g.connect(ctx.destination);
+      g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(vol,t+0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+      o.start(t); o.stop(t+dur+0.02);
+    }
+    function sweep(f1,f2,t,dur,vol,type){
+      if(!ctx)return;
+      var o=ctx.createOscillator(),g=ctx.createGain();
+      o.type=type||'sawtooth'; o.frequency.setValueAtTime(f1,t);
+      o.frequency.exponentialRampToValueAtTime(f2,t+dur);
+      o.connect(g); g.connect(ctx.destination);
+      g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(vol,t+0.03);
+      g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+      o.start(t); o.stop(t+dur+0.02);
+    }
+    return {
+      init:function(){ ensure(); resume(); },
+      // 考え中の緊迫したビート（問題ごとに少しずつ速く＝ドキドキ）
+      bedStart:function(level){
+        if(!on||!ensure())return; resume(); this.bedStop();
+        var step=0, iv=Math.max(360,760-level*42);
+        var root=[65.41,73.42,82.41][level%3];
+        bed=setInterval(function(){
+          if(!ctx)return;
+          var t=ctx.currentTime;
+          tone(root,t,iv/1000*0.9,0.075,'sine');
+          if(step%2===1) tone(root*1.5,t,iv/1000*0.5,0.03,'triangle');
+          if(step%4===0) tone(root*2,t,0.09,0.025,'square');
+          step++;
+        },iv);
+      },
+      bedStop:function(){ if(bed){clearInterval(bed);bed=null;} },
+      sel:function(){ if(!on||!ensure())return; resume(); var t=ctx.currentTime; tone(880,t,0.08,0.07,'square'); },
+      lock:function(){ if(!on||!ensure())return; resume(); var t=ctx.currentTime;
+        sweep(520,120,t,0.55,0.10,'sawtooth'); tone(98,t+0.1,0.5,0.07,'sine'); },
+      right:function(){ if(!on||!ensure())return; resume(); var t=ctx.currentTime;
+        [523.25,659.25,783.99,1046.5,1318.5].forEach(function(f,i){ tone(f,t+i*0.09,0.42,0.075,'triangle'); });
+        tone(1046.5,t+0.5,0.9,0.05,'sine'); tone(1567.98,t+0.5,0.9,0.035,'sine'); },
+      wrong:function(){ if(!on||!ensure())return; resume(); var t=ctx.currentTime;
+        sweep(220,70,t,0.9,0.11,'sawtooth'); tone(103.8,t,0.85,0.07,'square'); },
+      help:function(){ if(!on||!ensure())return; resume(); var t=ctx.currentTime;
+        [659.25,880,1174.66].forEach(function(f,i){ tone(f,t+i*0.07,0.22,0.055,'triangle'); }); },
+      win:function(){ if(!on||!ensure())return; resume(); var t=ctx.currentTime;
+        [523.25,659.25,783.99,1046.5,1318.5,1567.98,2093].forEach(function(f,i){ tone(f,t+i*0.1,0.55,0.07,'triangle'); });
+        [261.63,329.63,392].forEach(function(f){ tone(f,t+0.7,1.3,0.05,'sine'); }); },
+      toggle:function(){ on=!on; if(!on)this.bedStop(); return on; },
+      isOn:function(){ return on; }
+    };
+  })();
+
+  // ---------- 出題の組み立て（レベル順・毎回ランダム）----------
+  function shuffle(a){ for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i];a[i]=a[j];a[j]=t; } return a; }
+  function byLv(n){ var r=[]; for(var i=0;i<BANK.length;i++) if(BANK[i].lv===n) r.push(BANK[i]); return shuffle(r); }
+  function build(){
+    var e=byLv(1), m=byLv(2), h=byLv(3);
+    // 易4 → 中3 → 難3 の順で、だんだん難しく
+    var list=e.slice(0,4).concat(m.slice(0,3)).concat(h.slice(0,3));
+    // 選択肢もシャッフル（正解位置が毎回変わる）
+    return list.map(function(it){
+      var pack=it.o.map(function(txt,i){ return {t:txt, ok:(i===it.a)}; });
+      shuffle(pack);
+      var ai=0; for(var i=0;i<pack.length;i++) if(pack[i].ok) ai=i;
+      return {q:it.q, o:pack.map(function(p){return p.t;}), a:ai, e:it.e};
+    });
+  }
+
+  // ---------- 画面 ----------
+  function show(id,on){ var el=$(id); if(el) el.style.display=on?'':'none'; }
+  function esc(t){ return String(t==null?'':t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  function dots(){
+    var h='';
+    for(var i=0;i<10;i++) h+='<i class="'+(i<idx?'ok':(i===idx?'now':''))+'"></i>';
+    $('moDots').innerHTML=h;
+  }
+  function render(){
+    var it=qs[idx];
+    sel=-1; locked=false; gone=[];
+    $('moStep').textContent='Q'+(idx+1)+' / 10';
+    $('moRank').textContent=RANKS[idx];
+    dots();
+    $('moQ').textContent=it.q;
+    var h='';
+    for(var i=0;i<it.o.length;i++){
+      h+='<button type="button" class="mo-opt" data-i="'+i+'"><span class="ab">'+ABC[i]+'</span><span>'+esc(it.o[i])+'</span></button>';
+    }
+    $('moOpts').innerHTML=h;
+    $('moConfirm').className='mo-confirm';
+    $('moHelp').className='mo-help'; $('moHelp').innerHTML='';
+    $('moExp').className='mo-exp'; $('moExp').innerHTML='';
+    $('moNext').className='mo-next';
+    $('moBodyScroll');
+    var b=document.querySelector('#moPlay .mo-body'); if(b)b.scrollTop=0;
+    MA.bedStart(idx);
+  }
+
+  function pick(i){
+    if(locked)return;
+    if(gone.indexOf(i)>=0)return;
+    sel=i; MA.sel();
+    var els=$('moOpts').querySelectorAll('.mo-opt');
+    for(var k=0;k<els.length;k++) els[k].className='mo-opt'+(gone.indexOf(k)>=0?' gone':'')+(k===i?' sel':'');
+    $('moConfirm').className='mo-confirm show';
+  }
+  function unpick(){
+    sel=-1;
+    var els=$('moOpts').querySelectorAll('.mo-opt');
+    for(var k=0;k<els.length;k++) els[k].className='mo-opt'+(gone.indexOf(k)>=0?' gone':'');
+    $('moConfirm').className='mo-confirm';
+  }
+  function lockIn(){
+    if(sel<0||locked)return;
+    locked=true;
+    $('moConfirm').className='mo-confirm';
+    MA.bedStop(); MA.lock();
+    var it=qs[idx], els=$('moOpts').querySelectorAll('.mo-opt');
+    for(var k=0;k<els.length;k++) els[k].disabled=true;
+    // ドキドキの“タメ”
+    setTimeout(function(){
+      var ok=(sel===it.a);
+      for(var k=0;k<els.length;k++){
+        els[k].className='mo-opt'+(gone.indexOf(k)>=0?' gone':'');
+        if(k===it.a) els[k].className+=' right';
+        else if(k===sel) els[k].className+=' wrong';
+      }
+      if(ok){ score++; MA.right(); } else { MA.wrong(); }
+      var ex=$('moExp');
+      ex.className='mo-exp show '+(ok?'ok':'ng');
+      ex.innerHTML='<div class="h">'+(ok?'正解！':'残念…　正解は '+ABC[it.a]+'：'+esc(it.o[it.a]))+'</div>'+esc(it.e);
+      $('moNx').textContent=(idx>=9)?'結果を見る':'次の問題へ';
+      $('moNext').className='mo-next show';
+      var b=document.querySelector('#moPlay .mo-body');
+      if(b) b.scrollTop=b.scrollHeight;
+    },1500);
+  }
+  function next(){
+    if(idx>=9){ finish(); return; }
+    idx++; render();
+  }
+
+  // ---------- ライフライン ----------
+  function life5050(){
+    if(used.l1||locked)return; used.l1=true; $('moL1').disabled=true; MA.help();
+    var it=qs[idx], wrongs=[];
+    for(var i=0;i<4;i++) if(i!==it.a) wrongs.push(i);
+    shuffle(wrongs); gone=wrongs.slice(0,2);
+    var els=$('moOpts').querySelectorAll('.mo-opt');
+    for(var k=0;k<els.length;k++){
+      if(gone.indexOf(k)>=0){ els[k].className='mo-opt gone'; if(sel===k){ sel=-1; $('moConfirm').className='mo-confirm'; } }
+    }
+    var hp=$('moHelp'); hp.className='mo-help show';
+    hp.innerHTML='<div class="h">50 : 50</div>不正解の選択肢を2つ消しました。残り2つのうち、どちらかが正解です！';
+  }
+  function lifeTel(){
+    if(used.l2||locked)return; used.l2=true; $('moL2').disabled=true; MA.help();
+    var it=qs[idx];
+    // 知人の確信度は問題の難しさで変化（やさしい問題ほど自信あり）
+    var conf=[0,0,92,88,80][Math.min(4,Math.max(2,Math.ceil((idx+1)/3)+1))]||85;
+    var hit=Math.random()*100 < conf;
+    var ans=it.a;
+    if(!hit){ var c=[]; for(var i=0;i<4;i++) if(i!==it.a&&gone.indexOf(i)<0) c.push(i); if(c.length) ans=c[Math.floor(Math.random()*c.length)]; }
+    var lines=[
+      'もしもし？ あぁ、その話ね。うん、たぶん <b>'+ABC[ans]+'</b> で間違いないと思うよ。',
+      'おっ、深田ゼミのクイズか！ それなら <b>'+ABC[ans]+'</b> じゃないかな。',
+      'えーっと…記憶をたどると、答えは <b>'+ABC[ans]+'</b> だね。'
+    ];
+    var hp=$('moHelp'); hp.className='mo-help show';
+    hp.innerHTML='<div class="h">TELEPHONE</div>'+lines[Math.floor(Math.random()*lines.length)]
+      +'<br><span style="opacity:.75">「<b>'+esc(it.o[ans])+'</b>」…自信は '+conf+'% くらいかな！</span>';
+  }
+  function lifeAud(){
+    if(used.l3||locked)return; used.l3=true; $('moL3').disabled=true; MA.help();
+    var it=qs[idx];
+    var live=[]; for(var i=0;i<4;i++) if(gone.indexOf(i)<0) live.push(i);
+    // 正解に票が集まりやすいが、ときどき割れる
+    var pct={}, rest=100, top=Math.floor(38+Math.random()*34);
+    if(live.length===2) top=Math.floor(55+Math.random()*25);
+    pct[it.a]=top; rest-=top;
+    var others=live.filter(function(i){return i!==it.a;});
+    for(var j=0;j<others.length;j++){
+      var v=(j===others.length-1)?rest:Math.floor(Math.random()*(rest+1));
+      pct[others[j]]=v; rest-=v;
+    }
+    var rows='';
+    for(var i=0;i<4;i++){
+      if(gone.indexOf(i)>=0) continue;
+      var p=pct[i]||0;
+      rows+='<div class="row"><span class="k">'+ABC[i]+'</span><span class="track"><span class="fill" data-p="'+p+'"></span></span><span class="p">'+p+'%</span></div>';
+    }
+    var hp=$('moHelp'); hp.className='mo-help show';
+    hp.innerHTML='<div class="h">AUDIENCE</div>会場のみなさんに聞いてみました！<div class="mo-aud">'+rows+'</div>';
+    setTimeout(function(){
+      var f=hp.querySelectorAll('.fill');
+      for(var i=0;i<f.length;i++) f[i].style.width=f[i].getAttribute('data-p')+'%';
+    },60);
+  }
+
+  // ---------- 結果 ----------
+  function finish(){
+    MA.bedStop();
+    show('moPlay',false);
+    $('moIntro').className='mo-intro';
+    $('moResult').className='mo-result show';
+    $('moNum').textContent=score;
+    var name,cmt,shot='';
+    if(score===10){
+      name='深田ゼミ 名誉教授';
+      cmt='パーフェクト！ ここまで知っているなんて…<em>もはやゼミ生より深田ゼミです。</em>';
+      shot='この画面のスクリーンショットを深田先生に見せたら、何かいいこと、あるかも？';
+    }else if(score===9){
+      name='深田ゼミ OBOG';
+      cmt='<em>えっ？ もう、深田ゼミじゃないの？</em> あと1問で完全制覇でした。惜しい！';
+      shot='スクリーンショットを撮って、研究室で「9問正解でした」と伝えてみてください。';
+    }else if(score===8){
+      name='4回生 卒論生';
+      cmt='さすがの正解率！ <em>卒論指導もきっと乗りこなせます。</em>';
+      shot='あと少しで深田ゼミ博士。もう一度チャレンジしてみては？';
+    }else if(score===7){
+      name='3回生 エース';
+      cmt='かなりの深田ゼミ通です。<em>この調子で研究室にも足を運んでみてください。</em>';
+    }else if(score===6){
+      name='深田ゼミ 正式配属';
+      cmt='合格ライン突破！ <em>あなたはもう、深田ゼミの一員です。</em>';
+    }else if(score===5){
+      name='深田ゼミ 仮配属';
+      cmt='半分正解！ 残り半分は、<em>研究室に来れば全部わかります。</em>';
+    }else if(score===3||score===4){
+      name='面談ウェイティング';
+      cmt='まだまだ知らないことだらけ。<em>そこが伸びしろです！</em>';
+    }else if(score===1||score===2){
+      name='エントリー受付済み';
+      cmt='これから知っていけば大丈夫。<em>まずは説明会からどうぞ！</em>';
+    }else{
+      name='見学にきた人';
+      cmt='ようこそ深田ゼミへ！ <em>ここからすべてが始まります。</em>';
+    }
+    $('moRankName').textContent=name;
+    $('moCmt').innerHTML=cmt;
+    $('moShot').textContent=shot;
+    if(score>=9) MA.win();
+  }
+
+  // ---------- 開始・終了 ----------
+  function start(){
+    qs=build(); idx=0; score=0; used={l1:false,l2:false,l3:false};
+    $('moL1').disabled=false; $('moL2').disabled=false; $('moL3').disabled=false;
+    $('moIntro').className='mo-intro';
+    $('moResult').className='mo-result';
+    show('moPlay',true);
+    MA.init();
+    render();
+  }
+  function open(){
+    ov.className='mo-overlay show'; document.body.style.overflow='hidden';
+    show('moPlay',false);
+    $('moResult').className='mo-result';
+    $('moIntro').className='mo-intro show';
+    MA.init();
+  }
+  function close(){ ov.className='mo-overlay'; document.body.style.overflow=''; MA.bedStop(); }
+
+  // ---------- イベント（直接バインド＋委譲の二重化）----------
+  function bind(id,fn){ var el=$(id); if(el) el.addEventListener('click',function(e){ e.preventDefault(); e.stopPropagation(); fn(); }); }
+  bind('moStart',open); bind('moClose',close); bind('moGo',start);
+  bind('moYes',lockIn); bind('moNo',unpick); bind('moNx',next);
+  bind('moL1',life5050); bind('moL2',lifeTel); bind('moL3',lifeAud);
+  bind('moAgain',start); bind('moDone',close);
+  var mm=$('moMusic');
+  if(mm) mm.addEventListener('click',function(e){ e.stopPropagation();
+    var on=MA.toggle(); mm.className='mo-ctl'+(on?'':' off');
+    if(on && $('moPlay').style.display!=='none' && !locked) MA.bedStart(idx); });
+
+  document.addEventListener('click',function(e){
+    var t=e.target;
+    if(!t.closest)return;
+    if(t.closest('#moStart')){ e.preventDefault(); open(); return; }
+    if(t===ov){ close(); return; }
+    var op=t.closest('.mo-opt');
+    if(op && ov.className.indexOf('show')>=0){ pick(parseInt(op.getAttribute('data-i'),10)); }
+  });
+  addEventListener('keydown',function(e){
+    if(ov.className.indexOf('show')<0)return;
+    if(e.key==='Escape')close();
+  });
 });
 </script>
 </body>
