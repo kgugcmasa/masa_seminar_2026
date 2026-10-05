@@ -1981,7 +1981,7 @@ safe('visits',function(){
   function step(i){
     if(i>=sources.length){ localCount(); return; }
     tryURL(sources[i].url, sources[i].pick,
-      function(n){ mark(); cache(n); render(n,'人が深田ゼミを訪れました'); },
+      function(n){ mark(); cache(n); render(n,'人が深田ゼミWEBサイトを訪れました'); },
       function(){ step(i+1); });
   }
   step(0);
