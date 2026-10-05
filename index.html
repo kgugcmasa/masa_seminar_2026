@@ -563,7 +563,7 @@ footer p{margin-top:16px}
 .mo-overlay{position:fixed;inset:0;z-index:230;background:radial-gradient(ellipse at 50% 0%,rgba(74,54,130,.55),rgba(5,7,14,.94) 60%),rgba(5,7,14,.95);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);opacity:0;pointer-events:none;transition:opacity .45s ease;display:grid;place-items:center;padding:20px}
 .mo-overlay.show{opacity:1;pointer-events:auto}
 .mo-overlay:not(.show),.mo-overlay:not(.show) *{pointer-events:none!important}
-.mo-modal{position:relative;width:min(680px,100%);max-height:92vh;display:flex;flex-direction:column;transform:translateY(24px) scale(.97);transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.mo-modal{position:relative;width:min(680px,100%);max-height:92vh;max-height:92dvh;display:flex;flex-direction:column;min-height:0;transform:translateY(24px) scale(.97);transition:transform .5s cubic-bezier(.2,.8,.2,1)}
 .mo-overlay.show .mo-modal{transform:none}
 .mo-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}
 .mo-logo{font-family:var(--mincho);font-weight:800;font-size:clamp(17px,2.8vw,22px);letter-spacing:.06em;color:#fff;text-shadow:0 0 22px rgba(255,196,84,.55)}
@@ -576,7 +576,7 @@ footer p{margin-top:16px}
 .mo-ctl.off{opacity:.45}
 
 /* ステージ（問題パネル） */
-.mo-stage{background:linear-gradient(170deg,rgba(28,24,56,.95),rgba(10,12,24,.98));border:1px solid rgba(255,196,84,.28);border-radius:24px;box-shadow:0 30px 90px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.06);overflow:hidden;display:flex;flex-direction:column;min-height:0}
+.mo-stage{background:linear-gradient(170deg,rgba(28,24,56,.95),rgba(10,12,24,.98));border:1px solid rgba(255,196,84,.28);border-radius:24px;box-shadow:0 30px 90px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.06);overflow:hidden;display:flex;flex-direction:column;flex:1 1 auto;min-height:0}
 .mo-bar{display:flex;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid rgba(255,255,255,.08);background:rgba(0,0,0,.25);flex-shrink:0}
 .mo-step{font-family:var(--lat);font-weight:700;font-size:12px;letter-spacing:.1em;color:#FFC454;white-space:nowrap}
 .mo-rank{font-size:12px;color:#C4CDDD;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -585,7 +585,8 @@ footer p{margin-top:16px}
 .mo-dots i.ok{background:linear-gradient(140deg,#FFE9A8,#FFB454)}
 .mo-dots i.now{background:#fff;box-shadow:0 0 8px #FFC454}
 
-.mo-body{padding:24px 24px 26px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(255,196,84,.4) transparent}
+.mo-play{display:flex;flex-direction:column;flex:1 1 auto;min-height:0}
+.mo-body{padding:24px 24px 26px;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;flex:1 1 auto;min-height:0;scrollbar-width:thin;scrollbar-color:rgba(255,196,84,.4) transparent}
 .mo-body::-webkit-scrollbar{width:6px}
 .mo-body::-webkit-scrollbar-thumb{background:rgba(255,196,84,.4);border-radius:6px}
 .mo-q{font-family:var(--mincho);font-weight:700;font-size:clamp(17px,2.5vw,21px);line-height:1.75;color:#fff;text-align:center;min-height:62px;display:grid;place-items:center;padding:6px 4px 18px}
@@ -606,7 +607,7 @@ footer p{margin-top:16px}
 
 /* ファイナルアンサー確認 */
 .mo-confirm{margin-top:16px;display:none;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;text-align:center}
-.mo-confirm.show{display:flex}
+.mo-confirm.show{display:flex;position:sticky;bottom:-2px;z-index:3;padding:12px 0 4px;margin-left:-24px;margin-right:-24px;background:linear-gradient(to bottom,rgba(16,14,34,0),rgba(14,13,30,.92) 42%,rgba(12,11,26,.98));-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
 .mo-confirm .ask{width:100%;font-family:var(--mincho);font-weight:700;font-size:16px;color:#FFC454;letter-spacing:.06em}
 .mo-yes,.mo-no{font:inherit;font-weight:700;font-size:14.5px;padding:12px 26px;border-radius:999px;cursor:pointer;border:none;transition:transform .2s,box-shadow .2s}
 .mo-yes{background:linear-gradient(140deg,#FFE9A8,#FFB454 60%,#E8913A);color:#2A1A05;box-shadow:0 8px 24px rgba(255,180,84,.4)}
@@ -615,7 +616,8 @@ footer p{margin-top:16px}
 .mo-no:hover{border-color:#FFC454;color:#FFC454}
 
 /* ライフライン */
-.mo-life{display:flex;gap:10px;justify-content:center;padding:0 24px 20px;flex-wrap:wrap}
+.mo-life{display:flex;gap:10px;justify-content:center;padding:0 24px 20px;flex-wrap:wrap;flex-shrink:0}
+.mo-life.hide{display:none}
 .mo-l{position:relative;font:inherit;font-weight:700;font-size:12.5px;letter-spacing:.04em;padding:10px 16px;border-radius:999px;border:1.5px solid rgba(255,196,84,.45);background:rgba(10,14,24,.6);color:#FFD98A;cursor:pointer;transition:border-color .2s,background .2s,transform .2s}
 .mo-l:hover:not(:disabled){background:rgba(255,196,84,.14);transform:translateY(-2px)}
 .mo-l:disabled{opacity:.3;cursor:default;text-decoration:line-through}
@@ -638,13 +640,13 @@ footer p{margin-top:16px}
 .mo-aud .p{width:40px;text-align:right;font-family:var(--lat);font-weight:700;color:#EAEFF7}
 
 .mo-next{margin-top:18px;text-align:center;display:none}
-.mo-next.show{display:block}
+.mo-next.show{display:block;position:sticky;bottom:-2px;z-index:3;padding:14px 0 4px;margin-left:-24px;margin-right:-24px;background:linear-gradient(to bottom,rgba(16,14,34,0),rgba(14,13,30,.92) 42%,rgba(12,11,26,.98));-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
 .mo-nx{font:inherit;font-weight:700;font-size:14.5px;padding:13px 32px;border-radius:999px;border:none;cursor:pointer;background:linear-gradient(140deg,#FFE9A8,#FFB454 60%,#E8913A);color:#2A1A05;box-shadow:0 8px 24px rgba(255,180,84,.4);transition:transform .2s}
 .mo-nx:hover{transform:translateY(-2px)}
 
 /* スタート画面・結果画面 */
 .mo-intro,.mo-result{padding:34px 28px 32px;text-align:center;display:none}
-.mo-intro.show,.mo-result.show{display:block}
+.mo-intro.show,.mo-result.show{display:block;flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
 .mo-intro h3{font-family:var(--mincho);font-weight:800;font-size:clamp(22px,4vw,30px);color:#fff;letter-spacing:.04em;margin-bottom:12px}
 .mo-intro p{font-size:14px;color:#C4CDDD;line-height:1.95;max-width:430px;margin:0 auto}
 .mo-rules{margin:20px auto 24px;max-width:420px;text-align:left;display:grid;gap:8px}
@@ -664,7 +666,10 @@ footer p{margin-top:16px}
 .mo-rb.o{background:transparent;border:1.5px solid rgba(255,255,255,.28);color:#EAEFF7}
 .mo-rb.o:hover{border-color:#FFC454;color:#FFC454}
 .mo-rb:hover{transform:translateY(-2px)}
-@media(max-width:520px){.mo-body{padding:18px 16px 20px}.mo-life{padding:0 16px 16px;gap:7px}.mo-l{font-size:11.5px;padding:9px 12px}.mo-intro,.mo-result{padding:26px 18px 26px}.mo-score{font-size:50px}}
+@media(max-width:520px){.mo-body{padding:18px 16px 20px}.mo-next.show,.mo-confirm.show{margin-left:-16px;margin-right:-16px}.mo-life{padding:0 16px 16px;gap:7px}.mo-l{font-size:11.5px;padding:9px 12px}.mo-intro,.mo-result{padding:26px 18px 26px}.mo-score{font-size:50px}}
+@media(max-height:700px){.mo-q{font-size:16px;min-height:0;padding:2px 2px 12px}.mo-opt{padding:11px 13px;font-size:13.5px}.mo-opts{gap:8px}.mo-body{padding:14px 16px 16px}.mo-bar{padding:10px 16px}.mo-life{padding:0 16px 12px}}
+@media(max-height:560px){.mo-top{margin-bottom:8px}.mo-logo{font-size:16px}.mo-q{font-size:15px;padding:0 0 10px}.mo-opt{padding:9px 12px;font-size:13px}}
+@media(max-width:360px){.mo-confirm.show{gap:8px;padding:10px 0 4px}.mo-confirm .ask{font-size:14px}.mo-yes{padding:11px 18px;font-size:13.5px}.mo-no{padding:11px 16px;font-size:13.5px}.mo-opt{padding:10px 12px;font-size:13px}.mo-q{font-size:15.5px}}
 </style>
 </head>
 <body>
@@ -1274,7 +1279,7 @@ footer p{margin-top:16px}
       </div>
 
       <!-- 出題画面 -->
-      <div id="moPlay" style="display:none">
+      <div id="moPlay" class="mo-play" style="display:none">
         <div class="mo-bar">
           <span class="mo-step" id="moStep">Q1 / 10</span>
           <span class="mo-rank" id="moRank">見学にきた人</span>
@@ -2167,6 +2172,7 @@ safe('masaonaire',function(){
   function render(){
     var it=qs[idx];
     sel=-1; locked=false; gone=[];
+    var lf=$('moLife'); if(lf) lf.className='mo-life';   // ライフラインを再表示
     $('moStep').textContent='Q'+(idx+1)+' / 10';
     $('moRank').textContent=RANKS[idx];
     dots();
@@ -2192,6 +2198,14 @@ safe('masaonaire',function(){
     var els=$('moOpts').querySelectorAll('.mo-opt');
     for(var k=0;k<els.length;k++) els[k].className='mo-opt'+(gone.indexOf(k)>=0?' gone':'')+(k===i?' sel':'');
     $('moConfirm').className='mo-confirm show';
+    // 端末を問わず「ファイナルアンサー」が必ず見えるように
+    var bd=document.querySelector('#moPlay .mo-body');
+    function toYes(){
+      var y=$('moYes');
+      if(y&&y.scrollIntoView){ try{ y.scrollIntoView({block:'nearest'}); }catch(e){ y.scrollIntoView(false); } }
+      else if(bd){ bd.scrollTop=bd.scrollHeight; }
+    }
+    toYes(); requestAnimationFrame(toYes); setTimeout(toYes,120);
   }
   function unpick(){
     sel=-1;
@@ -2220,8 +2234,18 @@ safe('masaonaire',function(){
       ex.innerHTML='<div class="h">'+(ok?'正解！':'残念…　正解は '+ABC[it.a]+'：'+esc(it.o[it.a]))+'</div>'+esc(it.e);
       $('moNx').textContent=(idx>=9)?'結果を見る':'次の問題へ';
       $('moNext').className='mo-next show';
+      var lf=$('moLife'); if(lf) lf.className='mo-life hide';   // 縦の余白を確保
+      // 端末を問わず「次へ」が必ず見えるようにスクロール（描画確定後に複数回）
       var b=document.querySelector('#moPlay .mo-body');
-      if(b) b.scrollTop=b.scrollHeight;
+      function toBottom(){
+        if(!b)return;
+        b.scrollTop=b.scrollHeight;
+        var nx=$('moNx');
+        if(nx&&nx.scrollIntoView){ try{ nx.scrollIntoView({block:'nearest'}); }catch(e){ nx.scrollIntoView(false); } }
+      }
+      toBottom();
+      requestAnimationFrame(toBottom);
+      setTimeout(toBottom,120); setTimeout(toBottom,420);
     },1500);
   }
   function next(){
