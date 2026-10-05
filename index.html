@@ -670,6 +670,46 @@ footer p{margin-top:16px}
 @media(max-height:700px){.mo-q{font-size:16px;min-height:0;padding:2px 2px 12px}.mo-opt{padding:11px 13px;font-size:13.5px}.mo-opts{gap:8px}.mo-body{padding:14px 16px 16px}.mo-bar{padding:10px 16px}.mo-life{padding:0 16px 12px}}
 @media(max-height:560px){.mo-top{margin-bottom:8px}.mo-logo{font-size:16px}.mo-q{font-size:15px;padding:0 0 10px}.mo-opt{padding:9px 12px;font-size:13px}}
 @media(max-width:360px){.mo-confirm.show{gap:8px;padding:10px 0 4px}.mo-confirm .ask{font-size:14px}.mo-yes{padding:11px 18px;font-size:13.5px}.mo-no{padding:11px 16px;font-size:13.5px}.mo-opt{padding:10px 12px;font-size:13px}.mo-q{font-size:15.5px}}
+
+/* ---------- 今日、何する？ ---------- */
+.btn-today{font:inherit;cursor:pointer;border:1.5px solid rgba(127,209,255,.55);background:linear-gradient(120deg,rgba(127,209,255,.14),rgba(108,140,255,.10));color:#DCE8F6}
+.btn-today:hover{border-color:#7FD1FF;color:#fff;box-shadow:0 10px 30px rgba(108,140,255,.3)}
+
+.td-overlay{position:fixed;inset:0;z-index:225;background:rgba(8,12,20,.8);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);opacity:0;pointer-events:none;transition:opacity .4s ease;display:grid;place-items:center;padding:20px}
+.td-overlay.show{opacity:1;pointer-events:auto}
+.td-overlay:not(.show),.td-overlay:not(.show) *{pointer-events:none!important}
+.td-modal{position:relative;width:min(560px,100%);max-height:92vh;max-height:92dvh;display:flex;flex-direction:column;min-height:0;background:linear-gradient(165deg,#16243A,#0E1420);border:1px solid rgba(127,209,255,.3);border-radius:26px;box-shadow:0 30px 90px rgba(0,0,0,.65);overflow:hidden;transform:translateY(24px) scale(.97);transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.td-overlay.show .td-modal{transform:none}
+.td-head{padding:24px 26px 16px;border-bottom:1px solid var(--line);flex-shrink:0;position:relative;text-align:center}
+.td-head .en{font-family:var(--lat);font-size:10px;font-weight:700;letter-spacing:.28em;color:#7FD1FF}
+.td-head h3{font-family:var(--mincho);font-weight:800;font-size:clamp(20px,3.4vw,25px);color:#fff;letter-spacing:.05em;margin-top:7px}
+.td-close{position:absolute;top:18px;right:18px;width:36px;height:36px;border:1px solid var(--line);border-radius:50%;background:rgba(14,20,32,.6);color:#EAEFF7;cursor:pointer;font-size:16px;display:grid;place-items:center;transition:border-color .2s,color .2s,transform .2s}
+.td-close:hover{border-color:#7FD1FF;color:#7FD1FF;transform:rotate(90deg)}
+.td-body{padding:26px 24px 22px;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;flex:1 1 auto;min-height:0;text-align:center}
+
+.td-card{border-radius:20px;padding:30px 24px;background:linear-gradient(150deg,rgba(127,209,255,.12),rgba(108,140,255,.07));border:1px solid rgba(127,209,255,.26);min-height:168px;display:flex;flex-direction:column;justify-content:center}
+.td-card.pop{animation:tdPop .55s cubic-bezier(.2,.9,.25,1) both}
+@keyframes tdPop{0%{opacity:0;transform:translateY(14px) scale(.96)}60%{transform:translateY(-3px) scale(1.012)}100%{opacity:1;transform:none}}
+.td-tags{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;margin-bottom:14px}
+.td-tag{font-size:10.5px;font-weight:700;letter-spacing:.08em;padding:4px 11px;border-radius:999px;background:rgba(127,209,255,.16);color:#9FDBFF;border:1px solid rgba(127,209,255,.26)}
+.td-tag.lv{background:rgba(255,180,84,.14);color:#FFD08A;border-color:rgba(255,180,84,.3)}
+.td-m{font-family:var(--mincho);font-weight:700;font-size:clamp(18px,3.2vw,22px);line-height:1.8;color:#fff;letter-spacing:.02em}
+.td-sub{margin-top:14px;font-size:13.5px;color:#9FB3CC;line-height:1.8}
+.td-ready{font-family:var(--mincho);font-size:16px;color:#9FB3CC;line-height:1.9}
+
+.td-acts{margin-top:20px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.td-b{font:inherit;font-weight:700;font-size:14.5px;padding:13px 26px;border-radius:999px;cursor:pointer;border:none;transition:transform .2s,box-shadow .2s,border-color .2s,color .2s}
+.td-b.main{background:linear-gradient(96deg,#7FD1FF,#5AA9FF 55%,#6C8CFF);color:#0E1420;box-shadow:0 8px 26px rgba(90,169,255,.34)}
+.td-b.sub{background:transparent;border:1.5px solid var(--line);color:#EAEFF7}
+.td-b.sub:hover{border-color:#7FD1FF;color:#7FD1FF}
+.td-b:hover{transform:translateY(-2px)}
+.td-b:disabled{opacity:.45;cursor:default;transform:none}
+.td-done{margin-top:16px;min-height:24px;font-weight:700;font-size:15px;color:#7FD1FF}
+.td-done.pop{animation:tdPop .5s both}
+.td-foot{flex-shrink:0;padding:14px 24px 20px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:center;gap:8px;font-size:12.5px;color:var(--tx-muted)}
+.td-count{font-family:var(--lat);font-weight:700;font-size:15px;color:#FFD08A}
+@media(max-width:520px){.td-body{padding:20px 16px 18px}.td-card{padding:24px 16px;min-height:150px}.td-m{font-size:17.5px}.td-b{padding:12px 20px;font-size:14px}}
+@media(max-height:620px){.td-card{min-height:0;padding:20px 16px}.td-head{padding:18px 20px 12px}.td-body{padding:16px 16px 14px}}
 </style>
 </head>
 <body>
@@ -1060,6 +1100,7 @@ footer p{margin-top:16px}
       <div class="hero-btns" style="justify-content:center">
         <a class="btn btn-solid" href="https://forms.gle/8P6FBtdYy763ArKVA" target="_blank" rel="noopener">エントリーシートを記入する</a>
         <a class="btn btn-ghost" href="mailto:m.fukada@gc.kobegakuin.ac.jp">深田先生にメールする</a>
+        <button type="button" class="btn btn-today" id="tdStart">今日、何する？</button>
       </div>
       <p class="cta-note" style="margin-top:18px">ボタンが開かない場合は、上のカードのアドレス／URLをタップすると文字が選択できます（長押し・⌘/Ctrl+Cでコピー）</p>
     </div>
@@ -1070,7 +1111,7 @@ footer p{margin-top:16px}
   <div class="visits" id="visits" aria-live="polite">
     <span class="v-lab">VISITORS</span>
     <div class="v-num" id="visitNum"><span class="v-digit">-</span></div>
-    <span class="v-sub" id="visitSub">人が深田ゼミWEBサイトを訪れました</span>
+    <span class="v-sub" id="visitSub">人が深田ゼミを訪れました</span>
   </div>
   <div class="f-logo">深田ゼミ</div>
   <div class="f-en">FUKADA SEMINAR — GAKUSHU</div>
@@ -1315,6 +1356,30 @@ footer p{margin-top:16px}
           <button class="mo-rb o" id="moDone">閉じる</button>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- TODAY MODAL -->
+<div class="td-overlay" id="tdOverlay" role="dialog" aria-modal="true" aria-labelledby="tdTitle">
+  <div class="td-modal">
+    <div class="td-head">
+      <span class="en">TODAY'S ONE STEP</span>
+      <h3 id="tdTitle">今日、何する？</h3>
+      <button class="td-close" id="tdClose" aria-label="閉じる">✕</button>
+    </div>
+    <div class="td-body">
+      <div class="td-card" id="tdCard">
+        <p class="td-ready">ボタンを押すと、<br>今日の小さな一歩が出てきます。</p>
+      </div>
+      <div class="td-acts">
+        <button type="button" class="td-b main" id="tdDraw">今日、何する？</button>
+        <button type="button" class="td-b sub" id="tdDid" disabled>やってみた！</button>
+      </div>
+      <div class="td-done" id="tdDone" aria-live="polite"></div>
+    </div>
+    <div class="td-foot">
+      今日の楽習チャレンジ <span class="td-count" id="tdCount">0</span> 回
     </div>
   </div>
 </div>
@@ -1846,7 +1911,7 @@ safe('faq',function(){
 //  ★ GASカウンターのURLをここに貼ると、全訪問者の合計が表示されます
 //    （貼らない場合は無料カウンターサービス→端末内カウントの順に動作）
 // ============================================================
-var COUNTER_URL = "https://script.google.com/macros/s/AKfycby-Kb6CsgIih9j5Vo8yEWq_XT3qjhLWgG1rMZWrvktV9GyeffCkcHg8xl8Y2-KUCOwv5w/exec";   // 例: "https://script.google.com/macros/s/xxxxx/exec"
+var COUNTER_URL = "";   // 例: "https://script.google.com/macros/s/xxxxx/exec"
 
 safe('visits',function(){
   var box=$('visits'), numEl=$('visitNum'), subEl=$('visitSub');
@@ -1873,7 +1938,7 @@ safe('visits',function(){
     // 直前に取得できた合計値があれば、それを表示（通信が一時的に失敗しても数字が戻らない）
     var shared=0;
     try{ shared=parseInt(localStorage.getItem(CACHE)||'0',10)||0; }catch(e){}
-    if(shared>0){ render(shared,'人が深田ゼミWEBサイトを訪れました'); return; }
+    if(shared>0){ render(shared,'人が深田ゼミを訪れました'); return; }
     var n=0;
     try{
       n=parseInt(localStorage.getItem(LOCAL)||'0',10)||0;
@@ -1916,7 +1981,7 @@ safe('visits',function(){
   function step(i){
     if(i>=sources.length){ localCount(); return; }
     tryURL(sources[i].url, sources[i].pick,
-      function(n){ mark(); cache(n); render(n,'人が深田ゼミWEBをサイトを訪れました'); },
+      function(n){ mark(); cache(n); render(n,'人が深田ゼミを訪れました'); },
       function(){ step(i+1); });
   }
   step(0);
@@ -2397,6 +2462,123 @@ safe('masaonaire',function(){
     if(ov.className.indexOf('show')<0)return;
     if(e.key==='Escape')close();
   });
+});
+
+// ============================================================
+//  今日、何する？（Today's One Step）
+//  ミッションは下の MISSIONS 配列を編集すれば追加・変更できます
+// ============================================================
+safe('today',function(){
+  var ov=$('tdOverlay'); if(!ov)return;
+
+  var MISSIONS=[{"id": 1, "category": "人との距離を縮める", "level": 2, "mission": "今日は、普段あまり話さない人と3分だけ話してみよう。", "message": "3分あれば、意外と仲良くなれるかも。"}, {"id": 2, "category": "人との距離を縮める", "level": 1, "mission": "今日まだ話していない人に「お疲れ！」と言ってみよう。", "message": "ひと言で、空気って変わる。"}, {"id": 3, "category": "人との距離を縮める", "level": 1, "mission": "いつもと違う人の隣に座ってみよう。", "message": "席が変われば、話す人も変わる。"}, {"id": 4, "category": "人との距離を縮める", "level": 2, "mission": "最近話していない友達に、こちらから声をかけてみよう。", "message": "久しぶり、の一言でいい。"}, {"id": 5, "category": "人との距離を縮める", "level": 2, "mission": "名前は知っているけど話したことがない人に、話しかけてみよう。", "message": "知ってる人、から 話せる人 へ。"}, {"id": 6, "category": "人との距離を縮める", "level": 1, "mission": "今日すれ違った人に、笑顔で会釈してみよう。", "message": "目が合ったら、それだけで十分。"}, {"id": 7, "category": "人との距離を縮める", "level": 1, "mission": "教室に入るとき、誰かに「おはよう」と言ってみよう。", "message": "最初のひと言は、自分から。"}, {"id": 8, "category": "人との距離を縮める", "level": 2, "mission": "いつものグループから少し離れて、別の輪に入ってみよう。", "message": "輪は、入れば広がる。"}, {"id": 9, "category": "人との距離を縮める", "level": 1, "mission": "帰り際に、近くにいた人へ「また明日」と声をかけてみよう。", "message": "終わりの挨拶は、次のはじまり。"}, {"id": 10, "category": "人との距離を縮める", "level": 2, "mission": "今日話した人の名前を、会話の中で一度呼んでみよう。", "message": "名前を呼ばれると、人は嬉しい。"}, {"id": 11, "category": "人との距離を縮める", "level": 1, "mission": "同じ授業にいる人に「この授業どう？」と聞いてみよう。", "message": "共通の話題は、もう目の前にある。"}, {"id": 12, "category": "人との距離を縮める", "level": 2, "mission": "学食で、一人でいる知り合いに「隣いい？」と言ってみよう。", "message": "誘う側になってみる日。"}, {"id": 13, "category": "人との距離を縮める", "level": 1, "mission": "今日、誰かのために一度だけドアを押さえてみよう。", "message": "小さな親切は、会話のきっかけ。"}, {"id": 14, "category": "人との距離を縮める", "level": 2, "mission": "あまり話したことのない人に、持ち物を一つ褒めてみよう。", "message": "褒めるのも、立派な話しかけ。"}, {"id": 15, "category": "人との距離を縮める", "level": 2, "mission": "今日は自分から一度だけ、雑談をはじめてみよう。", "message": "用がなくても、話していい。"}, {"id": 16, "category": "人との距離を縮める", "level": 1, "mission": "誰かが落とし物をしていたら、迷わず声をかけてみよう。", "message": "動けた自分を、覚えておこう。"}, {"id": 17, "category": "人との距離を縮める", "level": 2, "mission": "最近できた知り合いに、連絡先を聞いてみよう。", "message": "つながりは、聞かないと始まらない。"}, {"id": 18, "category": "人との距離を縮める", "level": 1, "mission": "グループで黙っている人に、一度だけ話を振ってみよう。", "message": "気づける人は、強い。"}, {"id": 19, "category": "人との距離を縮める", "level": 3, "mission": "普段ほとんど話さない人に、自分から話しかけてみよう。", "message": "今日の一歩は、ちょっと大きい。"}, {"id": 20, "category": "人との距離を縮める", "level": 2, "mission": "今日会った人に「最近どう？」と聞いてみよう。", "message": "近況を聞ける関係は、財産。"}, {"id": 21, "category": "発表・授業で一歩", "level": 3, "mission": "今日の発表で、一回だけ質問してみよう。", "message": "質問することも、立派な参加。"}, {"id": 22, "category": "発表・授業で一歩", "level": 1, "mission": "発表を聞いて「ここ面白い！」と思ったところを一つ見つけよう。", "message": "見つける力は、聞く力。"}, {"id": 23, "category": "発表・授業で一歩", "level": 2, "mission": "誰かの発表について、感想を一つ伝えてみよう。", "message": "伝えられた側は、ずっと覚えてる。"}, {"id": 24, "category": "発表・授業で一歩", "level": 2, "mission": "いつもより一回だけ多く発言してみよう。", "message": "たった一回が、流れを変える。"}, {"id": 25, "category": "発表・授業で一歩", "level": 2, "mission": "「質問するほどでもないかな」と思ったことを、あえて聞いてみよう。", "message": "小さな疑問ほど、みんな気になってる。"}, {"id": 26, "category": "発表・授業で一歩", "level": 1, "mission": "発表を聞きながら、うなずく回数を少しだけ増やしてみよう。", "message": "うなずきは、最高の相づち。"}, {"id": 27, "category": "発表・授業で一歩", "level": 2, "mission": "今日の授業で学んだことを、一つだけ誰かに話してみよう。", "message": "話すと、知識は自分のものになる。"}, {"id": 28, "category": "発表・授業で一歩", "level": 1, "mission": "今日は一番前の席に座ってみよう。", "message": "景色が変わると、集中も変わる。"}, {"id": 29, "category": "発表・授業で一歩", "level": 2, "mission": "わからなかったところを、そのままにせず誰かに聞いてみよう。", "message": "聞ける人が、一番伸びる。"}, {"id": 30, "category": "発表・授業で一歩", "level": 2, "mission": "発表者に「準備おつかれさま」と声をかけてみよう。", "message": "準備の時間は、見えないけど確かにある。"}, {"id": 31, "category": "発表・授業で一歩", "level": 3, "mission": "今日はグループの中で、進行役をやってみよう。", "message": "まとめる経験は、どこでも効く。"}, {"id": 32, "category": "発表・授業で一歩", "level": 1, "mission": "ノートに、今日一番面白かったことを一行だけ書いてみよう。", "message": "一行でいい。残すことに意味がある。"}, {"id": 33, "category": "発表・授業で一歩", "level": 2, "mission": "誰かの意見に「それいいね」と言葉で反応してみよう。", "message": "反応は、議論のガソリン。"}, {"id": 34, "category": "発表・授業で一歩", "level": 2, "mission": "自分と違う意見の人に、理由を聞いてみよう。", "message": "違いの理由に、学びがある。"}, {"id": 35, "category": "発表・授業で一歩", "level": 3, "mission": "今日は、思いついた意見を一つだけ言い切ってみよう。", "message": "言ってみたら、案外こわくない。"}, {"id": 36, "category": "深田ゼミのこと", "level": 2, "mission": "深田ゼミについて、誰かに一つ質問してみよう。", "message": "知りたい気持ちは、動くきっかけ。"}, {"id": 37, "category": "深田ゼミのこと", "level": 2, "mission": "深田ゼミの先輩に「ゼミって実際どう？」と聞いてみよう。", "message": "リアルな話が、一番参考になる。"}, {"id": 38, "category": "深田ゼミのこと", "level": 3, "mission": "深田先生に、一言だけ話しかけてみよう。", "message": "用事がなくても、話しかけてOK。"}, {"id": 39, "category": "深田ゼミのこと", "level": 3, "mission": "深田先生に「最近、ゼミで何が一番楽しいですか？」と聞いてみよう。", "message": "質問は、関係のはじまり。"}, {"id": 40, "category": "深田ゼミのこと", "level": 1, "mission": "深田ゼミの活動で「参加してみたい」と思うものを一つ探してみよう。", "message": "気になった時点で、半分動いてる。"}, {"id": 41, "category": "深田ゼミのこと", "level": 2, "mission": "深田ゼミ生に「深田ゼミの楽しいところって何？」と聞いてみよう。", "message": "答えは、人の数だけある。"}, {"id": 42, "category": "深田ゼミのこと", "level": 2, "mission": "ゼミの誰かに「最近どう？」と聞いてみよう。", "message": "近況報告は、ゆるくていい。"}, {"id": 43, "category": "深田ゼミのこと", "level": 1, "mission": "深田ゼミのサイトで、気になったページを一つ誰かに教えてみよう。", "message": "シェアも、立派な参加。"}, {"id": 44, "category": "深田ゼミのこと", "level": 2, "mission": "先輩に、卒業研究のテーマをどう決めたか聞いてみよう。", "message": "決め方を知ると、自分も決めやすい。"}, {"id": 45, "category": "深田ゼミのこと", "level": 2, "mission": "ゼミの誰かに、おすすめの授業を一つ聞いてみよう。", "message": "先輩の情報は、ちょっとした宝。"}, {"id": 46, "category": "深田ゼミのこと", "level": 3, "mission": "研究室を、一度のぞいてみよう。", "message": "足を運んだ回数は、ちゃんと伝わる。"}, {"id": 47, "category": "深田ゼミのこと", "level": 1, "mission": "「楽習」って自分にとって何だろう、と一度だけ考えてみよう。", "message": "答えはまだなくていい。"}, {"id": 48, "category": "深田ゼミのこと", "level": 2, "mission": "ゼミのイベント写真を見て、気になったものを誰かに聞いてみよう。", "message": "写真の裏には、必ず物語がある。"}, {"id": 49, "category": "深田ゼミのこと", "level": 2, "mission": "深田ゼミの先輩に、留学のことを一つ聞いてみよう。", "message": "経験者の話は、教科書より早い。"}, {"id": 50, "category": "深田ゼミのこと", "level": 1, "mission": "もし自分がゼミで研究するなら何を調べたいか、一つ思い浮かべてみよう。", "message": "好きなことで、いい。"}, {"id": 51, "category": "新しい人との交流", "level": 2, "mission": "今日、一番話したことのない人と一言だけ話してみよう。", "message": "一言が、ゼロを1にする。"}, {"id": 52, "category": "新しい人との交流", "level": 2, "mission": "いつも同じメンバーでいるなら、今日は別の人と話してみよう。", "message": "いつもと違う、を一回だけ。"}, {"id": 53, "category": "新しい人との交流", "level": 1, "mission": "「どこから来たの？」と、誰かに聞いてみよう。", "message": "出身の話は、だいたい盛り上がる。"}, {"id": 54, "category": "新しい人との交流", "level": 1, "mission": "名前しか知らない人に、一つだけ質問してみよう。", "message": "質問は、最強の自己紹介。"}, {"id": 55, "category": "新しい人との交流", "level": 1, "mission": "誰かの好きなものを一つ聞いてみよう。", "message": "好きな話をする人は、いい顔をする。"}, {"id": 56, "category": "新しい人との交流", "level": 2, "mission": "今日初めて会った人の名前を、覚えて帰ろう。", "message": "名前を覚えるのは、敬意のかたち。"}, {"id": 57, "category": "新しい人との交流", "level": 2, "mission": "違う学年の人に、話しかけてみよう。", "message": "学年の壁は、意外と薄い。"}, {"id": 58, "category": "新しい人との交流", "level": 2, "mission": "留学や海外に興味がある人を、一人見つけてみよう。", "message": "同じ興味は、すぐ仲間になる。"}, {"id": 59, "category": "新しい人との交流", "level": 1, "mission": "誰かに「休みの日って何してるの？」と聞いてみよう。", "message": "素の話は、距離を縮める。"}, {"id": 60, "category": "新しい人との交流", "level": 2, "mission": "今日話した人に、自分のことも一つ話してみよう。", "message": "聞くだけじゃなく、開いてみる。"}, {"id": 61, "category": "新しい人との交流", "level": 2, "mission": "サークルやバイトが違う人に、その話を聞いてみよう。", "message": "知らない世界は、全部おもしろい。"}, {"id": 62, "category": "新しい人との交流", "level": 1, "mission": "誰かにおすすめの店を一つ聞いてみよう。", "message": "食べ物の話は、万国共通。"}, {"id": 63, "category": "新しい人との交流", "level": 2, "mission": "今日新しく話した人のことを、一つだけ覚えて帰ろう。", "message": "覚えていると、次が続く。"}, {"id": 64, "category": "新しい人との交流", "level": 3, "mission": "初対面の人に、自分から名前を名乗ってみよう。", "message": "名乗る勇気は、一瞬でいい。"}, {"id": 65, "category": "新しい人との交流", "level": 2, "mission": "誰かに「今ハマってる授業ある？」と聞いてみよう。", "message": "学びの話も、雑談になる。"}, {"id": 66, "category": "感謝とポジティブ", "level": 1, "mission": "今日は「ありがとう」を、いつもより一回多く言ってみよう。", "message": "言われて嫌な人は、いない。"}, {"id": 67, "category": "感謝とポジティブ", "level": 2, "mission": "誰かの良かったところを、一つ伝えてみよう。", "message": "気づいたなら、言葉にしよう。"}, {"id": 68, "category": "感謝とポジティブ", "level": 2, "mission": "誰かの発表を、素直に褒めてみよう。", "message": "褒め言葉は、ちゃんと届く。"}, {"id": 69, "category": "感謝とポジティブ", "level": 1, "mission": "「助かった！」を、今日はちゃんと言葉にしてみよう。", "message": "心の中だけじゃ、伝わらない。"}, {"id": 70, "category": "感謝とポジティブ", "level": 2, "mission": "今日一番笑わせてくれた人に「ありがとう」と言ってみよう。", "message": "笑わせるのは、才能です。"}, {"id": 71, "category": "感謝とポジティブ", "level": 1, "mission": "誰かの頑張りに気づいたら、一言だけ声をかけてみよう。", "message": "見ていてくれた、は嬉しい。"}, {"id": 72, "category": "感謝とポジティブ", "level": 2, "mission": "いつも助けてくれる人に、改めてお礼を言ってみよう。", "message": "当たり前を、言葉にする日。"}, {"id": 73, "category": "感謝とポジティブ", "level": 1, "mission": "今日会った人に「元気そうだね」と言ってみよう。", "message": "ポジティブは、うつる。"}, {"id": 74, "category": "感謝とポジティブ", "level": 2, "mission": "誰かの新しい挑戦を知ったら「いいね」と伝えてみよう。", "message": "応援は、タダで最強。"}, {"id": 75, "category": "感謝とポジティブ", "level": 1, "mission": "今日お世話になった人の顔を、一人だけ思い浮かべよう。", "message": "感謝は、気づくことから。"}, {"id": 76, "category": "自分への小さな挑戦", "level": 2, "mission": "今日は一回だけ、自分から話しかけてみよう。", "message": "待つより、動く日。"}, {"id": 77, "category": "自分への小さな挑戦", "level": 2, "mission": "いつもなら黙っているところで、一回だけ発言してみよう。", "message": "沈黙を破るのは、自分でいい。"}, {"id": 78, "category": "自分への小さな挑戦", "level": 2, "mission": "「まあいいか」と流しそうなことを、今日は一つやってみよう。", "message": "未来の自分が、ちょっと喜ぶ。"}, {"id": 79, "category": "自分への小さな挑戦", "level": 1, "mission": "スマホを見る時間を少し減らして、誰かと話してみよう。", "message": "目の前の人が、一番おもしろい。"}, {"id": 80, "category": "自分への小さな挑戦", "level": 3, "mission": "「恥ずかしいな」と思ったことを、一つだけやってみよう。", "message": "恥ずかしさの先に、成長がある。"}, {"id": 81, "category": "自分への小さな挑戦", "level": 1, "mission": "今日やりたいことを、一つだけ声に出してみよう。", "message": "言葉にすると、動きやすくなる。"}, {"id": 82, "category": "自分への小さな挑戦", "level": 2, "mission": "迷っていることを、誰かに相談してみよう。", "message": "相談は、弱さじゃない。"}, {"id": 83, "category": "自分への小さな挑戦", "level": 1, "mission": "いつもと違う道で、帰ってみよう。", "message": "違う景色は、違う発想をくれる。"}, {"id": 84, "category": "自分への小さな挑戦", "level": 2, "mission": "気になっていたイベントの情報を、一つ調べてみよう。", "message": "調べた時点で、もう一歩。"}, {"id": 85, "category": "自分への小さな挑戦", "level": 1, "mission": "今日できたことを、一つだけ自分で認めてみよう。", "message": "自分を認めるのも、練習。"}, {"id": 86, "category": "自分への小さな挑戦", "level": 2, "mission": "やろうと思って先延ばしにしていたことに、5分だけ手をつけよう。", "message": "5分でいい。始めれば続く。"}, {"id": 87, "category": "自分への小さな挑戦", "level": 2, "mission": "今日は、断らずに一つだけ誘いに乗ってみよう。", "message": "予定外が、思い出になる。"}, {"id": 88, "category": "自分への小さな挑戦", "level": 3, "mission": "人前で一度だけ、自分の意見を最初に言ってみよう。", "message": "最初の一人は、かっこいい。"}, {"id": 89, "category": "自分への小さな挑戦", "level": 1, "mission": "今日の自分に、小さな目標を一つ立ててみよう。", "message": "小さくていい。自分で決めるのが大事。"}, {"id": 90, "category": "自分への小さな挑戦", "level": 2, "mission": "苦手だと思っている相手に、普通に挨拶してみよう。", "message": "苦手意識は、案外こちらの思い込み。"}, {"id": 91, "category": "楽習と遊び心", "level": 1, "mission": "今日、一番面白い人を見つけよう。", "message": "観察するのも、楽習です。"}, {"id": 92, "category": "楽習と遊び心", "level": 2, "mission": "誰かを一回、笑わせてみよう。", "message": "笑いが起きた場所は、居心地がいい。"}, {"id": 93, "category": "楽習と遊び心", "level": 1, "mission": "今日初めて話す人と、好きな食べ物の話をしてみよう。", "message": "食の話に、ハズレなし。"}, {"id": 94, "category": "楽習と遊び心", "level": 1, "mission": "「最近ハマってるものある？」と誰かに聞いてみよう。", "message": "その人の世界が、少し見える。"}, {"id": 95, "category": "楽習と遊び心", "level": 2, "mission": "今日一番楽しかった瞬間を、誰かと共有してみよう。", "message": "共有すると、楽しさは倍になる。"}, {"id": 96, "category": "楽習と遊び心", "level": 1, "mission": "今日の自分を、漢字一文字で表してみよう。", "message": "一文字にすると、妙にしっくりくる。"}, {"id": 97, "category": "楽習と遊び心", "level": 2, "mission": "誰かに「深田ゼミを一言で表すと？」と聞いてみよう。", "message": "答えは人それぞれで、それが面白い。"}, {"id": 98, "category": "楽習と遊び心", "level": 1, "mission": "キャンパスで、今まで気づかなかった場所を一つ見つけよう。", "message": "毎日の景色にも、発見はある。"}, {"id": 99, "category": "楽習と遊び心", "level": 2, "mission": "仲間と、次にやってみたい遊びを一つ考えてみよう。", "message": "企画するのも、立派な力。"}, {"id": 100, "category": "楽習と遊び心", "level": 1, "mission": "今日のBGMを一曲決めて、気分を上げてみよう。", "message": "楽しむ工夫が、楽習のはじまり。"}];
+
+  var LV=['','ちょっとやってみる','少し勇気がいる','今日はちょっと頑張る'];
+  var PRAISE=['Nice!','一歩前進！','それが深田ゼミの楽習。','今日の自分、ちょっといいじゃん。',
+              'その一歩、効いてる。','いい動きでした。','やった人にしか見えない景色がある。',
+              'おつかれさま。','ちゃんと動けたね。','今日の一歩、記録しました。'];
+  var K_HIST='zemiTodayHist', K_DATE='zemiTodayDate', K_CNT='zemiTodayCount';
+
+  function load(k,d){ try{ var v=localStorage.getItem(k); return v===null?d:v; }catch(e){ return d; } }
+  function save(k,v){ try{ localStorage.setItem(k,String(v)); }catch(e){} }
+
+  // ---- 履歴（直近に出たミッションは出さない）----
+  function hist(){
+    try{ var a=JSON.parse(load(K_HIST,'[]')); return (a&&a.length)?a:[]; }catch(e){ return []; }
+  }
+  function pushHist(id){
+    var a=hist(); a.push(id);
+    if(a.length>100) a=a.slice(a.length-100);   // 100件まで保存
+    save(K_HIST, JSON.stringify(a));
+  }
+
+  // ---- 今日のチャレンジ回数 ----
+  function today(){ var d=new Date(); return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate(); }
+  function getCount(){
+    if(load(K_DATE,'')!==today()){ save(K_DATE,today()); save(K_CNT,'0'); return 0; }
+    return parseInt(load(K_CNT,'0'),10)||0;
+  }
+  function addCount(){ var n=getCount()+1; save(K_DATE,today()); save(K_CNT,n); return n; }
+  function showCount(){ $('tdCount').textContent=getCount(); }
+
+  // ---- スマートランダム ----
+  var last=null;
+  function pick(){
+    var h=hist();
+    var recent10=h.slice(-10), recent30=h.slice(-30);
+    var lastM=last;
+    var pool=MISSIONS.filter(function(m){
+      if(lastM&&m.id===lastM.id)return false;        // 直前と同じは出さない
+      return recent10.indexOf(m.id)<0;               // 直近10件は出さない
+    });
+    if(!pool.length) pool=MISSIONS.filter(function(m){ return !lastM||m.id!==lastM.id; });
+    if(!pool.length) pool=MISSIONS.slice();
+
+    // できるだけ均等に使う：出現回数が少ないものを優先
+    var cnt={};
+    for(var i=0;i<h.length;i++) cnt[h[i]]=(cnt[h[i]]||0)+1;
+    var min=Infinity;
+    for(var j=0;j<pool.length;j++){ var c=cnt[pool[j].id]||0; if(c<min)min=c; }
+    var fresh=pool.filter(function(m){ return (cnt[m.id]||0)<=min; });
+    if(fresh.length) pool=fresh;
+
+    // カテゴリ・難易度が連続しないように優先度をつける
+    var scored=pool.map(function(m){
+      var s=Math.random();
+      if(lastM){
+        if(m.category===lastM.category) s-=0.55;      // 同じカテゴリは出にくく
+        if(m.level===lastM.level)       s-=0.25;      // 同じ難易度も出にくく
+      }
+      if(recent30.indexOf(m.id)>=0) s-=0.3;
+      if(m.level===3) s-=0.12;                        // LEVEL3は出すぎないように
+      return {m:m,s:s};
+    });
+    scored.sort(function(a,b){ return b.s-a.s; });
+    // 上位の中からさらにランダムに選ぶ（毎回同じ順にならないように）
+    var topN=Math.min(scored.length, Math.max(3, Math.ceil(scored.length*0.3)));
+    return scored[Math.floor(Math.random()*topN)].m;
+  }
+
+  function esc(t){ return String(t==null?'':t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  function draw(){
+    var m=pick();
+    last=m; pushHist(m.id);
+    var card=$('tdCard');
+    card.className='td-card';
+    card.innerHTML='<div class="td-tags"><span class="td-tag">'+esc(m.category)+'</span>'
+                 + '<span class="td-tag lv">'+esc(LV[m.level])+'</span></div>'
+                 + '<p class="td-m">'+esc(m.mission)+'</p>'
+                 + '<p class="td-sub">'+esc(m.message)+'</p>';
+    void card.offsetWidth;                 // アニメーションを確実に再生
+    card.className='td-card pop';
+    $('tdDone').textContent='';
+    $('tdDone').className='td-done';
+    var did=$('tdDid'); did.disabled=false; did.textContent='やってみた！';
+    $('tdDraw').textContent='もう一回！';
+  }
+
+  function done(){
+    var did=$('tdDid'); if(did.disabled)return;
+    did.disabled=true; did.textContent='記録しました';
+    var el=$('tdDone');
+    el.textContent=PRAISE[Math.floor(Math.random()*PRAISE.length)];
+    el.className='td-done'; void el.offsetWidth; el.className='td-done pop';
+    addCount(); showCount();
+  }
+
+  function open(){ ov.className='td-overlay show'; document.body.style.overflow='hidden'; showCount(); }
+  function close(){ ov.className='td-overlay'; document.body.style.overflow=''; }
+
+  function bind(id,fn){ var el=$(id); if(el) el.addEventListener('click',function(e){ e.preventDefault(); e.stopPropagation(); fn(); }); }
+  bind('tdStart',open); bind('tdClose',close); bind('tdDraw',draw); bind('tdDid',done);
+  document.addEventListener('click',function(e){
+    if(!e.target.closest)return;
+    if(e.target.closest('#tdStart')){ e.preventDefault(); open(); return; }
+    if(e.target===ov) close();
+  });
+  addEventListener('keydown',function(e){ if(e.key==='Escape'&&ov.className.indexOf('show')>=0) close(); });
+  showCount();
 });
 </script>
 </body>
