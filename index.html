@@ -1178,7 +1178,7 @@ footer p{margin-top:16px}
   <div class="visits" id="visits" aria-live="polite">
     <span class="v-lab">VISITORS</span>
     <div class="v-num" id="visitNum"><span class="v-digit">-</span></div>
-    <span class="v-sub" id="visitSub">人が深田ゼミを訪れました</span>
+    <span class="v-sub" id="visitSub">人が深田ゼミWEBサイトを訪れました</span>
   </div>
   <div class="f-logo">深田ゼミ</div>
   <div class="f-en">FUKADA SEMINAR — GAKUSHU</div>
@@ -2027,7 +2027,7 @@ safe('visits',function(){
     // 直前に取得できた合計値があれば、それを表示（通信が一時的に失敗しても数字が戻らない）
     var shared=0;
     try{ shared=parseInt(localStorage.getItem(CACHE)||'0',10)||0; }catch(e){}
-    if(shared>0){ render(shared,'人が深田ゼミを訪れました'); return; }
+    if(shared>0){ render(shared,'人が深田ゼミWEBサイトを訪れました'); return; }
     var n=0;
     try{
       n=parseInt(localStorage.getItem(LOCAL)||'0',10)||0;
@@ -2070,7 +2070,7 @@ safe('visits',function(){
   function step(i){
     if(i>=sources.length){ localCount(); return; }
     tryURL(sources[i].url, sources[i].pick,
-      function(n){ mark(); cache(n); render(n,'人が深田ゼミを訪れました'); },
+      function(n){ mark(); cache(n); render(n,'人が深田ゼミWEBサイトを訪れました'); },
       function(){ step(i+1); });
   }
   step(0);
