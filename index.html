@@ -710,6 +710,70 @@ footer p{margin-top:16px}
 .td-count{font-family:var(--lat);font-weight:700;font-size:15px;color:#FFD08A}
 @media(max-width:520px){.td-body{padding:20px 16px 18px}.td-card{padding:24px 16px;min-height:150px}.td-m{font-size:17.5px}.td-b{padding:12px 20px;font-size:14px}}
 @media(max-height:620px){.td-card{min-height:0;padding:20px 16px}.td-head{padding:18px 20px 12px}.td-body{padding:16px 16px 14px}}
+
+/* ---------- PV（LP内再生） ---------- */
+.btn-pv{display:inline-flex;align-items:center;gap:10px;font:inherit;cursor:pointer;border:1.5px solid rgba(255,255,255,.5);background:rgba(255,255,255,.07);color:#fff;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.btn-pv:hover{border-color:var(--sun);color:var(--sun)}
+.pv-tri{width:0;height:0;border-style:solid;border-width:6px 0 6px 10px;border-color:transparent transparent transparent currentColor;flex-shrink:0}
+
+.pv-ov{position:fixed;inset:0;z-index:300;background:#000;opacity:0;pointer-events:none;transition:opacity .5s ease;display:grid;place-items:center}
+.pv-ov.show{opacity:1;pointer-events:auto}
+.pv-ov:not(.show),.pv-ov:not(.show) *{pointer-events:none!important}
+.pv-stage{position:relative;width:100%;height:100%;max-width:calc(100vh * 16 / 9);max-height:calc(100vw * 9 / 16);background:#0A0D16;overflow:hidden}
+.pv-scene{position:absolute;inset:0}
+.pv-ph{position:absolute;inset:0;background-size:cover;background-position:center 42%;animation:pvFade .9s ease both,pvKb 9s linear both}
+.pv-ph.f{animation:pvFade .45s ease both,pvKbf 2.6s linear both}
+@keyframes pvFade{from{opacity:0}to{opacity:1}}
+@keyframes pvKb{from{transform:scale(1.14)}to{transform:scale(1)}}
+@keyframes pvKbf{from{transform:scale(1.1)}to{transform:scale(1)}}
+.pv-sc{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,13,22,.72),rgba(10,13,22,.35) 38%,rgba(10,13,22,.8))}
+.pv-sc.d{background:linear-gradient(180deg,rgba(10,13,22,.86),rgba(10,13,22,.7) 50%,rgba(10,13,22,.92))}
+.pv-grain{position:absolute;inset:-50%;opacity:.055;pointer-events:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/></filter><rect width='120' height='120' filter='url(%23n)'/></svg>");animation:pvGr .5s steps(2) infinite}
+@keyframes pvGr{0%{transform:translate(0,0)}50%{transform:translate(-2%,1.5%)}100%{transform:translate(1%,-1%)}}
+.pv-vig{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at center,transparent 52%,rgba(0,0,0,.72))}
+.pv-bar{position:absolute;left:0;right:0;height:7.2%;background:#000;z-index:6;pointer-events:none}
+.pv-bar.t{top:0}.pv-bar.b{bottom:0}
+.pv-w{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:0 7%;z-index:4}
+.pv-w.l{place-items:center start;text-align:left;padding-left:9%}
+.pv-t{font-family:var(--mincho);font-weight:800;color:#fff;line-height:1.3;letter-spacing:.04em;text-shadow:0 4px 40px rgba(0,0,0,.6)}
+.pv-t em{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.pv-r{display:inline-block;opacity:0;transform:translateY(.5em);animation:pvRise .9s cubic-bezier(.2,.85,.25,1) both}
+@keyframes pvRise{to{opacity:1;transform:none}}
+.pv-lab{font-family:var(--lat);font-weight:700;letter-spacing:.34em;color:var(--sun);animation:pvFade 1s .2s both}
+.pv-big{font-family:var(--mincho);font-weight:800;color:#fff;font-size:clamp(70px,20vmin,230px);line-height:1;letter-spacing:.06em;display:inline-block}
+.pv-ruby{display:block;font-family:var(--goth);font-weight:700;font-size:clamp(11px,2.1vmin,22px);letter-spacing:.7em;color:#FFD9A0;margin-bottom:.9em;animation:pvFade 1s .15s both}
+.pv-num{font-family:var(--mincho);font-weight:800;font-size:clamp(46px,11vmin,120px);line-height:1;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;animation:pvRise .8s both}
+.pv-ws{font-family:var(--lat);font-weight:700;letter-spacing:.3em;font-size:clamp(9px,1.5vmin,14px);color:var(--sun);margin:.9em 0 .3em;animation:pvFade .8s .25s both}
+.pv-cap{position:absolute;left:9%;bottom:14%;z-index:5;font-family:var(--mincho);font-weight:700;color:#fff;font-size:clamp(15px,3.1vmin,30px);letter-spacing:.08em;animation:pvRise .7s .1s both;text-shadow:0 3px 24px rgba(0,0,0,.8)}
+.pv-cap::before{content:"";display:block;width:34px;height:2px;background:var(--grad);margin-bottom:.5em}
+.pv-band{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);z-index:5;padding:3.2vmin 7%;background:linear-gradient(90deg,rgba(10,13,22,.1),rgba(10,13,22,.8) 22%,rgba(10,13,22,.8) 78%,rgba(10,13,22,.1));text-align:center}
+.pv-prof{display:grid;grid-template-columns:auto 1fr;gap:5vmin;align-items:center;z-index:5}
+.pv-prof img{width:clamp(90px,21vmin,230px);border-radius:14px;box-shadow:0 20px 60px rgba(0,0,0,.7);animation:pvFade 1s both}
+.pv-pn{font-family:var(--mincho);font-weight:800;color:#fff;font-size:clamp(22px,5.2vmin,52px);letter-spacing:.08em}
+.pv-pe{font-family:var(--lat);font-weight:600;letter-spacing:.3em;color:var(--sun);font-size:clamp(9px,1.5vmin,14px);margin-top:.6em}
+.pv-pr{color:#C9D3E4;font-size:clamp(11px,2.1vmin,19px);line-height:1.9;margin-top:1em}
+.pv-qm{font-family:var(--mincho);font-size:clamp(40px,10vmin,110px);color:rgba(255,180,84,.3);line-height:0;animation:pvFade 1s both}
+.pv-logo{font-family:var(--mincho);font-weight:800;color:#fff;font-size:clamp(40px,11vmin,120px);letter-spacing:.14em}
+.pv-le{font-family:var(--lat);font-weight:700;letter-spacing:.44em;color:var(--sun);font-size:clamp(9px,1.7vmin,16px);margin-top:1.2em}
+.pv-em{font-family:var(--mincho);font-weight:700;color:#fff;font-size:clamp(15px,3.4vmin,34px);letter-spacing:.1em;margin-top:1.6em}
+.pv-es{color:#8B96AC;font-size:clamp(9px,1.6vmin,14px);letter-spacing:.14em;margin-top:1.4em}
+.pv-line{width:0;height:1px;background:var(--grad);margin:2.2em auto 0;animation:pvGrow 2s .6s both}
+@keyframes pvGrow{to{width:min(300px,42%)}}
+.pv-ui{position:absolute;left:0;right:0;bottom:0;z-index:10;padding:2.4vmin 3vmin;display:flex;align-items:center;gap:2vmin;opacity:0;transition:opacity .35s}
+.pv-ui.show{opacity:1}
+.pv-prog{flex:1;height:3px;background:rgba(255,255,255,.18);border-radius:3px;overflow:hidden;cursor:pointer}
+.pv-prog i{display:block;height:100%;width:0;background:var(--grad)}
+.pv-b{width:clamp(30px,5vmin,40px);height:clamp(30px,5vmin,40px);border-radius:50%;border:1px solid rgba(255,255,255,.28);background:rgba(0,0,0,.45);color:#fff;cursor:pointer;display:grid;place-items:center;flex-shrink:0;padding:0}
+.pv-b svg{width:46%;height:46%;fill:currentColor}
+.pv-b:hover{border-color:var(--sun);color:var(--sun)}
+.pv-time{font-family:var(--lat);font-size:clamp(9px,1.5vmin,13px);color:#C9D3E4;letter-spacing:.08em;flex-shrink:0}
+.pv-end{position:absolute;inset:0;z-index:15;display:none;place-items:center;background:rgba(5,7,14,.72);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.pv-end.show{display:grid}
+.pv-end .in{text-align:center;display:grid;gap:14px;justify-items:center}
+.pv-end button,.pv-end a{font:inherit;font-weight:700;font-size:clamp(13px,2.2vmin,16px);padding:1.1em 2.4em;border-radius:999px;border:none;cursor:pointer;text-decoration:none}
+.pv-rb{background:var(--grad);color:#1A1206;box-shadow:0 10px 36px rgba(255,138,92,.45)}
+.pv-cb{background:transparent;border:1.5px solid rgba(255,255,255,.4)!important;color:#fff}
+@media(max-width:640px){.pv-prof{grid-template-columns:1fr;gap:3vmin;justify-items:center;text-align:center}.pv-w.l{padding-left:7%}}
 </style>
 </head>
 <body>
@@ -743,6 +807,9 @@ footer p{margin-top:16px}
     <div class="hero-btns">
       <a class="btn btn-solid" href="https://forms.gle/8P6FBtdYy763ArKVA" target="_blank" rel="noopener">深田ゼミにエントリーする</a>
       <a class="btn btn-ghost" href="#about">どんなゼミ？</a>
+      <button type="button" class="btn btn-pv" id="pvOpen">
+        <span class="pv-tri" aria-hidden="true"></span>PVを見る
+      </button>
     </div>
     <div class="song-bar" id="songBar">
       <button class="sb-play" id="sbPlay" aria-label="テーマソングを再生 / 一時停止">
@@ -1100,7 +1167,7 @@ footer p{margin-top:16px}
       <div class="hero-btns" style="justify-content:center">
         <a class="btn btn-solid" href="https://forms.gle/8P6FBtdYy763ArKVA" target="_blank" rel="noopener">エントリーシートを記入する</a>
         <a class="btn btn-ghost" href="mailto:m.fukada@gc.kobegakuin.ac.jp">深田先生にメールする</a>
-        <button type="button" class="btn btn-today" id="tdStart">（悩んでるなら、これを！）今日、何する？</button>
+        <button type="button" class="btn btn-today" id="tdStart">今日、何する？</button>
       </div>
       <p class="cta-note" style="margin-top:18px">ボタンが開かない場合は、上のカードのアドレス／URLをタップすると文字が選択できます（長押し・⌘/Ctrl+Cでコピー）</p>
     </div>
@@ -1111,7 +1178,7 @@ footer p{margin-top:16px}
   <div class="visits" id="visits" aria-live="polite">
     <span class="v-lab">VISITORS</span>
     <div class="v-num" id="visitNum"><span class="v-digit">-</span></div>
-    <span class="v-sub" id="visitSub">人が深田ゼミWEBサイトを訪れました</span>
+    <span class="v-sub" id="visitSub">人が深田ゼミを訪れました</span>
   </div>
   <div class="f-logo">深田ゼミ</div>
   <div class="f-en">FUKADA SEMINAR — GAKUSHU</div>
@@ -1381,6 +1448,28 @@ footer p{margin-top:16px}
     <div class="td-foot">
       今日の楽習チャレンジ <span class="td-count" id="tdCount">0</span> 回
     </div>
+  </div>
+</div>
+
+<!-- PV OVERLAY -->
+<div class="pv-ov" id="pvOv" role="dialog" aria-modal="true" aria-label="深田ゼミ PV">
+  <div class="pv-stage" id="pvStage">
+    <div class="pv-scene" id="pvScene"></div>
+    <div class="pv-grain"></div><div class="pv-vig"></div>
+    <div class="pv-bar t"></div><div class="pv-bar b"></div>
+    <div class="pv-ui" id="pvUi">
+      <button class="pv-b" id="pvPP" aria-label="再生 / 一時停止"><svg viewBox="0 0 24 24"><path id="pvPPi" d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg></button>
+      <div class="pv-prog" id="pvProg"><i id="pvBar"></i></div>
+      <span class="pv-time" id="pvTime">0:00</span>
+      <button class="pv-b" id="pvMute" aria-label="音量"><svg viewBox="0 0 24 24"><path id="pvMi" d="M4 9v6h4l5 5V4L8 9H4z"/></svg></button>
+      <button class="pv-b" id="pvFs" aria-label="全画面"><svg viewBox="0 0 24 24"><path d="M4 9V4h5v2H6v3H4zm11-5h5v5h-2V6h-3V4zM6 15v3h3v2H4v-5h2zm12 3v-3h2v5h-5v-2h3z"/></svg></button>
+      <button class="pv-b" id="pvX" aria-label="閉じる"><svg viewBox="0 0 24 24"><path d="M19 6.4L17.6 5 12 10.6 6.4 5 5 6.4 10.6 12 5 17.6 6.4 19 12 13.4 17.6 19 19 17.6 13.4 12z"/></svg></button>
+    </div>
+    <div class="pv-end" id="pvEnd"><div class="in">
+      <button class="pv-rb" id="pvAgain">もう一度見る</button>
+      <a class="pv-cb" href="https://forms.gle/8P6FBtdYy763ArKVA" target="_blank" rel="noopener">深田ゼミにエントリーする</a>
+      <button class="pv-cb" id="pvClose2">閉じる</button>
+    </div></div>
   </div>
 </div>
 
@@ -1911,7 +2000,7 @@ safe('faq',function(){
 //  ★ GASカウンターのURLをここに貼ると、全訪問者の合計が表示されます
 //    （貼らない場合は無料カウンターサービス→端末内カウントの順に動作）
 // ============================================================
-var COUNTER_URL = "";   // 例: "https://script.google.com/macros/s/xxxxx/exec"
+var COUNTER_URL = "https://script.google.com/macros/s/AKfycbx1B9OJ_1yu_jIUBznUPBBd5k7-5KkikKH-Cqdcw4d-iSd2PUNhphJmRkzS4Ym_CmHwEw/exec";   // 例: "https://script.google.com/macros/s/xxxxx/exec"
 
 safe('visits',function(){
   var box=$('visits'), numEl=$('visitNum'), subEl=$('visitSub');
@@ -1938,7 +2027,7 @@ safe('visits',function(){
     // 直前に取得できた合計値があれば、それを表示（通信が一時的に失敗しても数字が戻らない）
     var shared=0;
     try{ shared=parseInt(localStorage.getItem(CACHE)||'0',10)||0; }catch(e){}
-    if(shared>0){ render(shared,'人が深田ゼミWEBサイトを訪れました'); return; }
+    if(shared>0){ render(shared,'人が深田ゼミを訪れました'); return; }
     var n=0;
     try{
       n=parseInt(localStorage.getItem(LOCAL)||'0',10)||0;
@@ -1981,7 +2070,7 @@ safe('visits',function(){
   function step(i){
     if(i>=sources.length){ localCount(); return; }
     tryURL(sources[i].url, sources[i].pick,
-      function(n){ mark(); cache(n); render(n,'人が深田ゼミWEBサイトを訪れました'); },
+      function(n){ mark(); cache(n); render(n,'人が深田ゼミを訪れました'); },
       function(){ step(i+1); });
   }
   step(0);
@@ -2579,6 +2668,179 @@ safe('today',function(){
   });
   addEventListener('keydown',function(e){ if(e.key==='Escape'&&ov.className.indexOf('show')>=0) close(); });
   showCount();
+});
+
+// ============================================================
+//  PV（既存の写真・テーマソングを再利用。LPのサイズは増えません）
+// ============================================================
+safe('pv',function(){
+  var ov=$('pvOv'), stage=$('pvStage'), scene=$('pvScene');
+  if(!ov||!scene)return;
+  var TOTAL=95, FADE_FROM=89;
+  var built=false, SC=[], au=null, cur=-1, playing=false, useAudio=true, t0=0, uiTimer=null;
+
+  // 既存ページの画像をそのまま使う（重複して埋め込まない）
+  function assets(){
+    function bg(sel){
+      var el=document.querySelector(sel); if(!el)return '';
+      var v=getComputedStyle(el).backgroundImage||'';
+      var m=v.match(/url\(["']?(.*?)["']?\)/); return m?m[1]:'';
+    }
+    function src(sel){ var el=document.querySelector(sel); return el?el.src:''; }
+    var g=[].slice.call(document.querySelectorAll('.gal-item img')).map(function(e){return e.src;});
+    return {
+      hero:bg('.hero-bg'), prof:src('.prof-photo img'), fin:src('.bigphoto img'),
+      yoga:g[0]||'', camp:g[1]||'', kon:g[2]||'', dodge:g[3]||'', cake:g[4]||'',
+      bbq:g[5]||'', korea:g[6]||'', bali:g[7]||'', utage:g[8]||'', taiwan:g[9]||'',
+      table:g[10]||'', sea:g[11]||'', obog:g[12]||''
+    };
+  }
+  function buildScenes(){
+    var A=assets();
+    SC=[
+     [0,'open',{sub:'KOBE GAKUIN UNIVERSITY — GLOBAL COMMUNICATION'}],
+     [4,'title',{ruby:'がくしゅう',main:'楽習'}],
+     [10.5,'copy',{img:A.hero,lines:['学びを楽しむ力が、','あなたの<em>武器</em>になる。']}],
+     [16,'copy',{img:A.kon,lines:['大学生になって、はじめて','「担任」を自分で選べる。']}],
+     [21.5,'word',{img:A.yoga,num:'01',w:'研究テーマが豊富',s:'VARIETY'}],
+     [24.5,'word',{img:A.dodge,num:'02',w:'コミュニケーションが活発',s:'COMMUNICATION'}],
+     [27.5,'word',{img:A.table,num:'03',w:'卒論指導がしっかり',s:'GUIDANCE'}],
+     [30.5,'cut',{img:A.bbq,cap:'春のBBQ大会'}],
+     [32.7,'cut',{img:A.camp,cap:'恒例の夏キャンプ'}],
+     [34.9,'cut',{img:A.cake,cap:'サプライズの夜'}],
+     [37.1,'cut',{img:A.utage,cap:'語りは、尽きない'}],
+     [39.3,'band',{img:A.sea,text:'とにかく、語る。いろいろ、語る。'}],
+     [44.5,'cut',{img:A.bali,cap:'バリ島'}],
+     [46.9,'cut',{img:A.taiwan,cap:'台湾・十分'}],
+     [49.3,'cut',{img:A.korea,cap:'韓国'}],
+     [51.7,'band',{img:A.sea,text:'旅も、学びも、全力で。'}],
+     [56.5,'prof',{img:A.prof,name:'深田 將揮',en:'FUKADA MASAKI',role:'0歳児から大学生まで。<br>あらゆる世代に教えてきた、教えるプロ。'}],
+     [62.5,'quote',{l1:'人生は、まるで',l2:'ジグソーパズルだ。'}],
+     [69,'copy',{img:A.obog,lines:['人生のパズルに、','<em>君という名のピース</em>を。']}],
+     [75,'final',{img:A.fin,text:'ゼミ生とは、一生の付き合い。'}],
+     [82,'end',{logo:'深田ゼミ',en:'FUKADA SEMINAR',msg:'さあ、僕らが待ってる。',cta:'神戸学院大学 グローバル・コミュニケーション学部'}]
+    ];
+  }
+  function split(t,base){
+    var h='',n=0;
+    t=t.replace(/<em>/g,'\u0001').replace(/<\/em>/g,'\u0002');
+    for(var i=0;i<t.length;i++){
+      var c=t.charAt(i);
+      if(c==='\u0001'){h+='<em>';continue;}
+      if(c==='\u0002'){h+='</em>';continue;}
+      if(c===' '){h+=' ';continue;}
+      h+='<span class="pv-r" style="animation-delay:'+(base+n*0.045).toFixed(3)+'s">'+c+'</span>'; n++;
+    }
+    return h;
+  }
+  function ph(img,f){ return img?'<div class="pv-ph'+(f?' f':'')+'" style="background-image:url('+img+')"></div>':''; }
+
+  function build(sc){
+    var d=sc[2], ty=sc[1], h='';
+    if(ty==='open'){
+      h='<div class="pv-w"><div><div class="pv-lab" style="font-size:clamp(8px,1.5vmin,13px)">'+d.sub+'</div><div class="pv-line" style="margin-top:2.4em"></div></div></div>';
+    }else if(ty==='title'){
+      h='<div class="pv-w"><div class="pv-big"><span class="pv-ruby">'+d.ruby+'</span>'+split(d.main,.25)+'</div></div>';
+    }else if(ty==='copy'){
+      h=ph(d.img)+'<div class="pv-sc"></div><div class="pv-w l"><div class="pv-t" style="font-size:clamp(20px,5.4vmin,56px)">'
+       +d.lines.map(function(l,i){return '<div>'+split(l,.25+i*.45)+'</div>';}).join('')+'</div></div>';
+    }else if(ty==='word'){
+      h=ph(d.img)+'<div class="pv-sc d"></div><div class="pv-w"><div><div class="pv-num">'+d.num+'</div>'
+       +'<div class="pv-ws">'+d.s+'</div><div class="pv-t" style="font-size:clamp(19px,5vmin,52px)">'+split(d.w,.35)+'</div></div></div>';
+    }else if(ty==='cut'){
+      h=ph(d.img,1)+'<div class="pv-sc"></div><div class="pv-cap">'+d.cap+'</div>';
+    }else if(ty==='band'){
+      h=ph(d.img)+'<div class="pv-sc d"></div><div class="pv-band"><div class="pv-t" style="font-size:clamp(19px,5.2vmin,54px)">'+split(d.text,.2)+'</div></div>';
+    }else if(ty==='prof'){
+      h=ph(d.img)+'<div class="pv-sc d"></div><div class="pv-w"><div class="pv-prof"><img src="'+d.img+'" alt="">'
+       +'<div><div class="pv-pn">'+split(d.name,.3)+'</div><div class="pv-pe">'+d.en+'</div><div class="pv-pr">'+d.role+'</div></div></div></div>';
+    }else if(ty==='quote'){
+      h='<div class="pv-w"><div><div class="pv-qm">&#8220;</div><div class="pv-t" style="font-size:clamp(21px,5.6vmin,58px);margin-top:.4em">'
+       +'<div>'+split(d.l1,.3)+'</div><div>'+split(d.l2,.75)+'</div></div><div class="pv-line"></div></div></div>';
+    }else if(ty==='final'){
+      h=ph(d.img)+'<div class="pv-sc"></div><div class="pv-w" style="align-items:end;padding-bottom:16%"><div class="pv-t" style="font-size:clamp(20px,5.6vmin,58px)">'+split(d.text,.3)+'</div></div>';
+    }else if(ty==='end'){
+      h='<div class="pv-w"><div><div class="pv-logo">'+split(d.logo,.2)+'</div><div class="pv-le">'+d.en+'</div>'
+       +'<div class="pv-line"></div><div class="pv-em">'+split(d.msg,1.1)+'</div><div class="pv-es">'+d.cta+'</div></div></div>';
+    }
+    scene.innerHTML=h;
+  }
+  function fmt(x){ x=Math.max(0,Math.floor(x)); return Math.floor(x/60)+':'+('0'+(x%60)).slice(-2); }
+  function now(){ return (useAudio&&au)?au.currentTime:(performance.now()-t0)/1000; }
+  function tick(){
+    if(!playing)return;
+    var t=now();
+    if(t>=TOTAL){ finish(); return; }
+    var i=0;
+    for(var k=0;k<SC.length;k++){ if(t>=SC[k][0]) i=k; }
+    if(i!==cur){ cur=i; build(SC[i]); }
+    if(au&&!au.muted) au.volume = t>FADE_FROM ? Math.max(0,(TOTAL-t)/(TOTAL-FADE_FROM)) : 1;
+    $('pvBar').style.width=(t/TOTAL*100)+'%';
+    $('pvTime').textContent=fmt(t)+' / '+fmt(TOTAL);
+    requestAnimationFrame(tick);
+  }
+  function showUi(){ $('pvUi').className='pv-ui show'; clearTimeout(uiTimer); uiTimer=setTimeout(function(){ $('pvUi').className='pv-ui'; },2400); }
+  function startPlay(){
+    $('pvEnd').className='pv-end';
+    playing=true; cur=-1;
+    if(au){ try{ au.currentTime=0; au.volume=1; }catch(e){}
+      var p=au.play(); if(p&&p.catch)p.catch(function(){ useAudio=false; t0=performance.now(); }); }
+    if(!au||au.paused){ useAudio=false; t0=performance.now(); }
+    $('pvPPi').setAttribute('d','M6 5h4v14H6zM14 5h4v14h-4z');
+    requestAnimationFrame(tick); showUi();
+  }
+  function finish(){ playing=false; if(au){try{au.pause();}catch(e){}} $('pvBar').style.width='100%'; $('pvEnd').className='pv-end show'; $('pvUi').className='pv-ui'; }
+  function open(){
+    if(!built){
+      buildScenes();
+      // 既存のテーマソングと同じ音源を、別プレーヤーとして使う（ファイルは増えません）
+      var src=$('themeAudio')?$('themeAudio').getAttribute('src'):'';
+      if(src){ au=new Audio(); au.src=src; au.preload='auto'; }
+      built=true;
+    }
+    // 既存のテーマソングが鳴っていたら止める（二重再生の防止）
+    try{ var th=$('themeAudio'); if(th&&!th.paused) th.pause(); }catch(e){}
+    ov.className='pv-ov show'; document.body.style.overflow='hidden';
+    startPlay();
+  }
+  function close(){
+    playing=false; if(au){try{au.pause();}catch(e){}}
+    ov.className='pv-ov'; document.body.style.overflow=''; scene.innerHTML='';
+  }
+
+  function bind(id,fn){ var el=$(id); if(el) el.addEventListener('click',function(e){ e.preventDefault(); e.stopPropagation(); fn(); }); }
+  bind('pvOpen',open); bind('pvX',close); bind('pvClose2',close); bind('pvAgain',startPlay);
+  bind('pvPP',function(){
+    if(playing){ playing=false; if(au){try{au.pause();}catch(e){}} $('pvPPi').setAttribute('d','M8 5v14l11-7z'); }
+    else{ playing=true; if(useAudio&&au){try{au.play();}catch(e){}} else { t0=performance.now()-now()*1000; }
+          $('pvPPi').setAttribute('d','M6 5h4v14H6zM14 5h4v14h-4z'); requestAnimationFrame(tick); }
+    showUi();
+  });
+  bind('pvMute',function(){
+    if(!au)return; au.muted=!au.muted;
+    $('pvMi').setAttribute('d', au.muted?'M4 9v6h4l5 5V4L8 9H4zm15.5 3l2.5 2.5-1 1L18.5 13 16 15.5l-1-1L17.5 12 15 9.5l1-1L18.5 11 21 8.5l1 1z':'M4 9v6h4l5 5V4L8 9H4z');
+    showUi();
+  });
+  bind('pvFs',function(){
+    if(!document.fullscreenElement){ var f=stage.requestFullscreen||stage.webkitRequestFullscreen; if(f)f.call(stage); }
+    else { var x=document.exitFullscreen||document.webkitExitFullscreen; if(x)x.call(document); }
+  });
+  var pr=$('pvProg');
+  if(pr) pr.addEventListener('click',function(e){
+    var r=this.getBoundingClientRect(), p=(e.clientX-r.left)/r.width*TOTAL;
+    if(useAudio&&au){ try{ au.currentTime=p; }catch(err){} } else { t0=performance.now()-p*1000; }
+    cur=-1; showUi();
+  });
+  document.addEventListener('click',function(e){ if(e.target.closest&&e.target.closest('#pvOpen')){ e.preventDefault(); open(); } });
+  if(stage){
+    stage.addEventListener('mousemove',showUi);
+    stage.addEventListener('touchstart',showUi,{passive:true});
+  }
+  addEventListener('keydown',function(e){
+    if(ov.className.indexOf('show')<0)return;
+    if(e.key==='Escape') close();
+    else if(e.key===' '){ e.preventDefault(); var b=$('pvPP'); if(b)b.click(); }
+  });
 });
 </script>
 </body>
