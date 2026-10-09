@@ -836,6 +836,19 @@ footer p{margin-top:16px}
 .wl-msgbox{margin-top:12px;font-size:13.5px;font-weight:700;line-height:1.8;min-height:20px}
 .wl-msgbox.ok{color:#53E08B}.wl-msgbox.ng{color:#FF8A7E}
 @media(max-width:520px){.wl-body{padding:16px 16px 20px}.wl-tabs{padding:12px 16px 0}.wl-head{padding:20px 18px 14px}}
+
+/* お知らせ：過去分のアコーディオン */
+.nb-acc{margin-top:4px;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:rgba(255,255,255,.02);transition:border-color .3s}
+.nb-acc.on{border-color:rgba(255,180,84,.4)}
+.nb-acc-h{width:100%;display:flex;align-items:center;gap:12px;font:inherit;font-weight:700;font-size:14px;color:#C4CDDD;background:transparent;border:none;cursor:pointer;padding:17px 20px;text-align:left;transition:color .2s,background .2s}
+.nb-acc-h:hover{color:var(--sun);background:rgba(255,180,84,.06)}
+.nb-acc-n{font-family:var(--lat);font-size:11.5px;font-weight:700;letter-spacing:.06em;color:var(--sun);background:rgba(255,180,84,.14);border:1px solid rgba(255,180,84,.3);border-radius:999px;padding:3px 10px}
+.nb-acc-i{margin-left:auto;font-size:11px;color:var(--sun);transition:transform .35s}
+.nb-acc.on .nb-acc-i{transform:rotate(180deg)}
+.nb-acc-b{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.2,.8,.2,1)}
+.nb-acc.on .nb-acc-b{max-height:2600px}
+.nb-acc-in{display:grid;gap:12px;padding:4px 14px 16px}
+@media(max-width:640px){.nb-acc-h{padding:15px 16px;font-size:13.5px}.nb-acc-in{padding:4px 10px 14px}}
 </style>
 </head>
 <body>
@@ -2245,18 +2258,42 @@ safe('notice',function(){
   }
 
   var items=[];
+  var SHOW_LATEST = 5;   // 常に表示する最新の件数
+
+  function itemHtml(it,i){
+    return '<button type="button" class="nb-item" data-i="'+i+'">'
+         +   '<span class="nb-date">'+esc(fmt(it))+'</span>'
+         +   '<span class="nb-ttl">'+esc(it.title)+(isNew(it)?'<span class="nb-new">NEW</span>':'')+'</span>'
+         +   (it.image?'<img class="nb-thumb" src="'+esc(it.image)+'" alt="" loading="lazy" onerror="this.style.display=\'none\'">':'')
+         +   '<span class="nb-arw" aria-hidden="true">\u25b6</span>'
+         + '</button>';
+  }
+
   function render(list){
     items=list||[];
+    // 日付の新しい順に必ず並べ替える（最新が常に一番上）
+    items.sort(function(a,b){
+      var da=toDate(a.date)||toDate(a.dateText), db=toDate(b.date)||toDate(b.dateText);
+      var ta=da?da.getTime():-Infinity, tb=db?db.getTime():-Infinity;
+      return tb-ta;
+    });
     if(!items.length){ listEl.innerHTML='<div class="nb-empty">現在、お知らせはありません。</div>'; return; }
-    var html='';
-    for(var i=0;i<items.length;i++){
-      var it=items[i];
-      html+='<button type="button" class="nb-item" data-i="'+i+'">'
-          +   '<span class="nb-date">'+esc(fmt(it))+'</span>'
-          +   '<span class="nb-ttl">'+esc(it.title)+(isNew(it)?'<span class="nb-new">NEW</span>':'')+'</span>'
-          +   (it.image?'<img class="nb-thumb" src="'+esc(it.image)+'" alt="" loading="lazy" onerror="this.style.display=\'none\'">':'')
-          +   '<span class="nb-arw" aria-hidden="true">\u25b6</span>'
-          + '</button>';
+
+    var html='', i;
+    for(i=0;i<items.length && i<SHOW_LATEST;i++) html+=itemHtml(items[i],i);
+
+    // 6件目以降は「過去のお知らせ」としてたたんでおく
+    if(items.length>SHOW_LATEST){
+      var rest='';
+      for(i=SHOW_LATEST;i<items.length;i++) rest+=itemHtml(items[i],i);
+      html+='<div class="nb-acc" id="nbAcc">'
+          +   '<button type="button" class="nb-acc-h" id="nbAccBtn" aria-expanded="false">'
+          +     '<span class="nb-acc-t">過去のお知らせ</span>'
+          +     '<span class="nb-acc-n">'+(items.length-SHOW_LATEST)+'件</span>'
+          +     '<span class="nb-acc-i" aria-hidden="true">\u25bc</span>'
+          +   '</button>'
+          +   '<div class="nb-acc-b"><div class="nb-acc-in">'+rest+'</div></div>'
+          + '</div>';
     }
     listEl.innerHTML=html;
   }
@@ -2279,6 +2316,14 @@ safe('notice',function(){
 
   document.addEventListener('click',function(e){
     var t=e.target;
+    var acc=t.closest?t.closest('.nb-acc-h'):null;
+    if(acc){
+      var box=acc.parentNode;
+      var open=box.className.indexOf('on')<0;
+      box.className='nb-acc'+(open?' on':'');
+      acc.setAttribute('aria-expanded',open?'true':'false');
+      return;
+    }
     var item=t.closest?t.closest('.nb-item'):null;
     if(item){ openModal(parseInt(item.getAttribute('data-i'),10)); return; }
     if(t.closest&&(t.closest('#nbClose')||t.closest('#nbCloseBtn'))){ closeModal(); return; }
