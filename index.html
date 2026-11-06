@@ -959,6 +959,8 @@ footer p{margin-top:16px}
 .mt-ph span{color:#536471;font-size:13px}
 .mt-ttl{margin-top:5px;font-size:15px;font-weight:800;line-height:1.5;color:#0F1419;letter-spacing:.01em}
 .mt-body{margin-top:4px;font-size:14.5px;line-height:1.75;color:#0F1419;white-space:pre-wrap;word-break:break-word}
+.mt-lnk{color:#1E88E5;text-decoration:none;word-break:break-all}
+.mt-lnk:hover{text-decoration:underline}
 .mt-img{display:block;width:100%;margin-top:11px;border-radius:16px;border:1px solid #EBEEF0;background:#F7F9FA}
 .mt-tag{display:inline-block;margin-top:8px;font-size:12.5px;font-weight:700;color:var(--mt-blue)}
 .mt-load,.mt-empty{padding:40px 24px;text-align:center;color:#536471;font-size:13.5px;line-height:1.9}
@@ -3590,7 +3592,7 @@ safe('wall',function(){
 //  ★ 全員で共有するカウントにしたい場合は、専用GASのURLをここに貼ってください
 //    （空のままでも、その端末での回数として動作します）
 // ============================================================
-var REACTION_URL = "https://script.google.com/macros/s/AKfycbwB2qzd30HEddiYhZiW3kYV2jFSH_HWO-2BKxnROzD-dOOLYAi2uaBPExs9EUgApr4VJQ/exec";   // 例: "https://script.google.com/macros/s/xxxxx/exec"
+var REACTION_URL = "";   // 例: "https://script.google.com/macros/s/xxxxx/exec"
 
 safe('reactions',function(){
   var grid=$('rxGrid'); if(!grid)return;
@@ -3795,6 +3797,18 @@ safe('masatter',function(){
     .replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
 
   // Googleドライブの共有リンクを表示用に変換
+  // {{URL}} または {{URL|テキスト}} をリンクに変換
+  function linkify(raw){
+    var out=esc(raw);
+    out=out.replace(/\{\{(https?:\/\/[^|}\s]+)\|([^}]+)\}\}/g,function(a,u,t){
+      return '<a href="'+u+'" target="_blank" rel="noopener noreferrer" class="mt-lnk">'+t+'</a>';
+    });
+    out=out.replace(/\{\{(https?:\/\/[^}\s]+)\}\}/g,function(a,u){
+      return '<a href="'+u+'" target="_blank" rel="noopener noreferrer" class="mt-lnk">'+u+'</a>';
+    });
+    return out;
+  }
+
   function driveUrl(u){
     u=String(u||'').trim(); if(!u)return '';
     var m=u.match(/\/file\/d\/([A-Za-z0-9_-]{10,})/) || u.match(/[?&]id=([A-Za-z0-9_-]{10,})/);
@@ -3904,7 +3918,7 @@ safe('masatter',function(){
        +   '<div class="mt-pb">'
        +     '<div class="mt-ph"><b>深田 將揮</b><span>@masa_zemi</span><span>・ '+esc(ago(it.date))+'</span></div>'
        +     (it.title?'<div class="mt-ttl">'+esc(it.title)+'</div>':'')
-       +     (it.body?'<div class="mt-body">'+esc(it.body)+'</div>':'')
+       +     (it.body?'<div class="mt-body">'+linkify(it.body)+'</div>':'')
        +     (img?'<img class="mt-img" src="'+esc(img)+'" alt="" loading="lazy" onerror="this.style.display=\'none\'">':'')
        +     '<div class="mt-acts">'
        +       '<button type="button" class="mt-act rep" data-act="reply" data-i="'+i+'" aria-label="返信">'
